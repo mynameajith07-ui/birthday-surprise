@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 23rd Birthday My Dear Varsha ❤️</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+}
+.page{
+    min-height:100vh;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+}
+.active{
+    display:flex;
+}
+.gift{
+    font-size:120px;
+    animation:bounce 1s infinite alternate;
+}
+@keyframes bounce{
+    from{transform:translateY(0);}
+    to{transform:translateY(-25px);}
+}
+h1{
+    font-size:38px;
+    margin:15px 0;
+}
+h2{
+    margin:10px 0;
+}
+input{
+    padding:14px;
+    font-size:18px;
+    border-radius:14px;
+    border:none;
+    width:260px;
+    text-align:center;
+}
+button{
+    padding:15px 32px;
+    font-size:19px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff006e;
+    cursor:pointer;
+    font-weight:bold;
+    margin:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+button:hover{
+    transform:scale(1.04);
+}
+#msg,#loveMsg,#heartMsg,#balloonMsg{
+    color:yellow;
+    font-size:20px;
+    font-weight:bold;
+}
+#mainContent{
+    display:none;
+}
+section{
+    padding:60px 20px;
+}
+.card{
+    background:white;
+    color:#333;
+    max-width:900px;
+    margin:auto;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+.main-photo{
+    width:260px;
+    height:320px;
+    object-fit:cover;
+    border-radius:25px;
+    margin:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:16px;
+    max-width:1000px;
+    margin:25px auto;
+}
+.gallery img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+.caption{
+    background:white;
+    color:#ff006e;
+    padding:10px;
+    border-radius:15px;
+    font-weight:bold;
+    margin-top:6px;
+}
+.reason{
+    background:#ffe6f0;
+    margin:12px;
+    padding:15px;
+    border-radius:15px;
+    font-size:20px;
+}
+.final{
+    font-size:34px;
+    animation:zoom 1s infinite alternate;
+}
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
+}
+.heart{
+    position:fixed;
+    bottom:-20px;
+    color:white;
+    font-size:25px;
+    animation:floatUp 5s linear infinite;
+    pointer-events:none;
+}
+@keyframes floatUp{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-100vh);opacity:0;}
+}
+#loveValue{
+    font-size:36px;
+    font-weight:bold;
+}
+.balloon{
+    font-size:75px;
+    cursor:pointer;
+    display:inline-block;
+    margin:10px;
+}
+.dob-box{
+    background:rgba(255,255,255,.25);
+    padding:14px 25px;
+    border-radius:20px;
+    font-size:21px;
+    margin:15px 0;
+}
+@media(max-width:600px){
+    h1{font-size:30px;}
+    .main-photo{width:220px;height:280px;}
+    .gallery img{height:190px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="step1" class="page active">
+    <div class="gift">🎁</div>
+    <h1>Birthday Surprise ❤️</h1>
+    <h2>Who is your favourite person?</h2>
+    <input type="text" id="favPerson" placeholder="Enter name">
+    <br>
+    <button onclick="checkName()">Open Surprise ❤️</button>
+    <p id="msg"></p>
+</div>
+
+<div id="step2" class="page">
+    <h1>💖 How much do you love me?</h1>
+    <input type="range" min="0" max="100" value="0" id="loveRange" oninput="showLove()">
+    <p id="loveValue">0%</p>
+    <p id="loveMsg"></p>
+    <button onclick="checkLove()">Next ❤️</button>
+</div>
+
+<div id="step3" class="page">
+    <h1>Will you love me forever? ❤️</h1>
+    <button onclick="nextStep(4)">YES ❤️</button>
+    <button onclick="nextStep(4)">OF COURSE 💖</button>
+    <button onclick="nextStep(4)">ALWAYS 😍</button>
+</div>
+
+<div id="step4" class="page">
+    <h1>Find My Heart ❤️</h1>
+    <p>Click the correct heart</p>
+    <button onclick="wrongHeart()">🤍</button>
+    <button onclick="nextStep(5)">❤️</button>
+    <button onclick="wrongHeart()">💙</button>
+    <p id="heartMsg"></p>
+</div>
+
+<div id="step5" class="page">
+    <h1>🎂 Cake Cutting Time</h1>
+    <div style="font-size:120px; cursor:pointer;" onclick="nextStep(6)">🎂</div>
+    <p>Click the cake, My Dear Varsha ❤️</p>
+</div>
+
+<div id="step6" class="page">
+    <h1>🎈 Pop the Balloons</h1>
+    <div>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+    </div>
+    <p id="balloonMsg"></p>
+    <button id="balloonNext" style="display:none;" onclick="showMain()">Final Surprise ❤️</button>
+</div>
+
+<div id="mainContent">
+
+<section>
+    <h1>🎂 Happy 23rd Birthday, My Dear Varsha ❤️</h1>
+    <div class="dob-box">DOB: 25/07/2003</div>
+    <img src="girl.jpeg" class="main-photo" alt="My Dear Varsha">
+
+    <p style="font-size:24px; max-width:800px; margin:auto; line-height:36px;">
+        Today is not just your birthday.<br>
+        It is the beautiful day my favourite person came into this world ❤️
+    </p>
+</section>
+
+<section>
+    <div class="card">
+        <h1>💌 My Dear Varshuuu</h1>
+        <p style="font-size:21px; line-height:36px;">
+            Happy 23rd Birthday, My Dear Varsha ❤️<br><br>
+
+            You are the most beautiful part of my life.
+            Your smile gives me happiness, your love gives me strength,
+            and your presence makes my world complete.
+            I feel lucky to have you in my life.
+            <br><br>
+
+            On this special day, I wish you endless happiness, success,
+            good health, peace, and all the love you truly deserve.
+            I promise to love you, support you, and stand with you always.
+            <br><br>
+
+            I love you today, tomorrow, always and forever ❤️<br><br>
+            Forever yours,<br>
+            <b>Ajith ❤️</b>
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h1>💖 10 Reasons Why I Love You</h1>
+        <div class="reason">❤️ Your beautiful smile</div>
+        <div class="reason">❤️ Your caring heart</div>
+        <div class="reason">❤️ Your kindness</div>
+        <div class="reason">❤️ You always support me</div>
+        <div class="reason">❤️ You make me happy</div>
+        <div class="reason">❤️ Your voice gives me peace</div>
+        <div class="reason">❤️ You understand me</div>
+        <div class="reason">❤️ You make every day special</div>
+        <div class="reason">❤️ You are my strength</div>
+        <div class="reason">❤️ I love everything about you</div>
+    </div>
+</section>
+
+<section>
+    <h1>📸 Our 10 Beautiful Memories ❤️</h1>
+
+    <div class="gallery">
+        <div><img src="photo1.jpeg" alt="Memory 1"><div class="caption">Memory 1 ❤️</div></div>
+        <div><img src="photo2.jpeg" alt="Memory 2"><div class="caption">Memory 2 ❤️</div></div>
+        <div><img src="photo3.jpeg" alt="Memory 3"><div class="caption">Memory 3 ❤️</div></div>
+        <div><img src="photo4.jpeg" alt="Memory 4"><div class="caption">Memory 4 ❤️</div></div>
+        <div><img src="photo5.jpeg" alt="Memory 5"><div class="caption">Memory 5 ❤️</div></div>
+        <div><img src="photo6.jpeg" alt="Memory 6"><div class="caption">Memory 6 ❤️</div></div>
+        <div><img src="photo7.jpeg" alt="Memory 7"><div class="caption">Memory 7 ❤️</div></div>
+        <div><img src="photo8.jpeg" alt="Memory 8"><div class="caption">Memory 8 ❤️</div></div>
+        <div><img src="photo9.jpeg" alt="Memory 9"><div class="caption">Memory 9 ❤️</div></div>
+        <div><img src="photo10.jpeg" alt="Memory 10"><div class="caption">Memory 10 ❤️</div></div>
+<div><img src="photo11.jpeg" alt="Memory 11"><div class="caption">Memory 11 ❤️</div></div>
+<div><img src="photo12.jpeg" alt="Memory 12"><div class="caption">Memory 12 ❤️</div></div>
+<div><img src="photo13.jpeg" alt="Memory 13"><div class="caption">Memory 13 ❤️</div></div>
+<div><img src="photo14.jpeg" alt="Memory 14"><div class="caption">Memory 14 ❤️</div></div>
+<div><img src="photo15.jpeg" alt="Memory 15"><div class="caption">Memory 15 ❤️</div></div>
+<div><img src="photo16.jpeg" alt="Memory 16"><div class="caption">Memory 16 ❤️</div></div>
+<div><img src="photo17.jpeg" alt="Memory 17"><div class="caption">Memory 17 ❤️</div></div>
+<div><img src="photo18.jpeg" alt="Memory 18"><div class="caption">Memory 18 ❤️</div></div>
+<div><img src="photo19.jpeg" alt="Memory 19"><div class="caption">Memory 19 ❤️</div></div>
+<div><img src="photo20.jpeg" alt="Memory 20"><div class="caption">Memory 20 ❤️</div></div>
+<div><img src="photo21.jpeg" alt="Memory 21"><div class="caption">Memory 21 ❤️</div></div>
+<div><img src="photo22.jpeg" alt="Memory 22"><div class="caption">Memory 22 ❤️</div></div>
+<div><img src="photo23.jpeg" alt="Memory 23"><div class="caption">Memory 23 ❤️</div></div>
+    </div>
+
+    <p style="font-size:22px;">
+        Every photo is a beautiful page in our love story ❤️
+    </p>
+</section>
+
+<section>
+    <div class="card">
+        <h1>🎂 Final Surprise 🎂</h1>
+        <p class="final">
+            I LOVE YOU, MY DEAR VARSHA ❤️<br><br>
+            Today... Tomorrow... Always... Forever...
+        </p>
+    </div>
+</section>
+
+</div>
+
+<script>
+let popped = 0;
+
+function checkName(){
+    var name = document.getElementById("favPerson").value.trim().toLowerCase();
+
+    if(name === "ajith"){
+        nextStep(2);
+    }else{
+        document.getElementById("msg").innerHTML =
+        "❌ Wrong answer! Only your favourite person can unlock this surprise ❤️";
+    }
+}
+
+function showLove(){
+    var value = document.getElementById("loveRange").value;
+    document.getElementById("loveValue").innerHTML = value + "%";
+
+    if(value < 100){
+        document.getElementById("loveMsg").innerHTML = "Only " + value + "%? Try 100% ❤️";
+    }else{
+        document.getElementById("loveMsg").innerHTML = "Awww! I knew it ❤️";
+    }
+}
+
+function checkLove(){
+    var value = document.getElementById("loveRange").value;
+    if(value == 100){
+        nextStep(3);
+    }else{
+        document.getElementById("loveMsg").innerHTML = "Set it to 100% to continue ❤️";
+    }
+}
+
+function nextStep(step){
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("step" + step).classList.add("active");
+}
+
+function wrongHeart(){
+    document.getElementById("heartMsg").innerHTML = "Oops! My heart is red ❤️";
+}
+
+function popBalloon(el){
+    el.style.visibility = "hidden";
+    popped++;
+
+    if(popped >= 4){
+        document.getElementById("balloonMsg").innerHTML = "All balloons popped! Surprise ready ❤️";
+        document.getElementById("balloonNext").style.display = "inline-block";
+    }
+}
+
+function showMain(){
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.getElementById("mainContent").style.display = "block";
+    createHearts();
+    window.scrollTo(0,0);
+}
+
+function createHearts(){
+    setInterval(function(){
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (18 + Math.random() * 25) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 500);
+}
+</script>
+
+</body>
+</html>
