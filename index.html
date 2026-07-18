@@ -6,17 +6,36 @@
 <title>Happy 23rd Birthday My Dear Varsha ❤️</title>
 
 <style>
+:root{
+    --pink:#ff4f87;
+    --pink-dark:#e6005c;
+    --rose:#ff7eb3;
+    --purple:#9b5de5;
+    --gold:#ffd166;
+    --white:#ffffff;
+    --dark:#4a1730;
+}
+
 *{
     box-sizing:border-box;
 }
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(255,255,255,.20), transparent 32%),
+        linear-gradient(135deg,#ff758c,#ff7eb3 48%,#9b5de5);
     color:white;
     text-align:center;
     overflow-x:hidden;
+    min-height:100vh;
 }
+
 .page{
     min-height:100vh;
     display:none;
@@ -24,146 +43,370 @@ body{
     justify-content:center;
     align-items:center;
     padding:25px;
+    position:relative;
+    overflow:hidden;
 }
+
+.page::before,
+.page::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+    filter:blur(2px);
+}
+
+.page::before{
+    top:-100px;
+    left:-80px;
+}
+
+.page::after{
+    right:-80px;
+    bottom:-100px;
+}
+
 .active{
     display:flex;
 }
+
+.content-layer{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
 .gift{
-    font-size:120px;
+    font-size:130px;
     animation:bounce 1s infinite alternate;
+    filter:drop-shadow(0 15px 18px rgba(0,0,0,.22));
 }
+
 @keyframes bounce{
-    from{transform:translateY(0);}
-    to{transform:translateY(-25px);}
+    from{transform:translateY(0) rotate(-3deg);}
+    to{transform:translateY(-25px) rotate(3deg);}
 }
+
 h1{
-    font-size:38px;
+    font-size:42px;
     margin:15px 0;
+    text-shadow:0 4px 14px rgba(0,0,0,.22);
 }
+
 h2{
-    margin:10px 0;
+    margin:10px 0 18px;
+    font-size:27px;
 }
-input{
-    padding:14px;
+
+input[type="text"]{
+    padding:15px 18px;
     font-size:18px;
-    border-radius:14px;
-    border:none;
-    width:260px;
+    border-radius:16px;
+    border:2px solid rgba(255,255,255,.7);
+    width:min(290px,90vw);
     text-align:center;
+    outline:none;
+    box-shadow:0 10px 24px rgba(0,0,0,.18);
 }
+
+input[type="range"]{
+    width:min(420px,88vw);
+    accent-color:#fff;
+}
+
 button{
     padding:15px 32px;
     font-size:19px;
     border:none;
     border-radius:30px;
     background:white;
-    color:#ff006e;
+    color:var(--pink-dark);
     cursor:pointer;
-    font-weight:bold;
+    font-weight:800;
     margin:10px;
-    box-shadow:0 8px 20px rgba(0,0,0,.2);
+    box-shadow:0 10px 25px rgba(0,0,0,.22);
+    transition:.25s ease;
 }
+
 button:hover{
-    transform:scale(1.04);
+    transform:translateY(-3px) scale(1.04);
+    box-shadow:0 14px 30px rgba(0,0,0,.28);
 }
+
 #msg,#loveMsg,#heartMsg,#balloonMsg{
-    color:yellow;
+    color:#fff6a8;
     font-size:20px;
-    font-weight:bold;
+    font-weight:800;
+    min-height:28px;
 }
+
 #mainContent{
     display:none;
 }
+
 section{
-    padding:60px 20px;
+    padding:70px 20px;
+    position:relative;
 }
+
+.hero-section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,.15), transparent 40%);
+}
+
 .card{
-    background:white;
+    background:rgba(255,255,255,.96);
     color:#333;
     max-width:900px;
     margin:auto;
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    padding:35px;
+    border-radius:28px;
+    box-shadow:0 15px 40px rgba(0,0,0,.28);
+    backdrop-filter:blur(8px);
 }
-.main-photo{
-    width:260px;
-    height:320px;
-    object-fit:cover;
-    border-radius:25px;
-    margin:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,.4);
+
+.card h1{
+    color:var(--pink-dark);
+    text-shadow:none;
 }
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:16px;
-    max-width:1000px;
+
+.photo-frame{
+    position:relative;
+    display:inline-block;
     margin:25px auto;
 }
+
+.photo-frame::before{
+    content:"";
+    position:absolute;
+    inset:-12px;
+    border-radius:38px;
+    background:linear-gradient(135deg,#fff,#ffd1e3,#ffe89a);
+    z-index:0;
+    box-shadow:0 18px 40px rgba(0,0,0,.30);
+}
+
+.main-photo{
+    position:relative;
+    z-index:1;
+    width:min(430px,88vw);
+    height:min(560px,112vw);
+    max-height:560px;
+    object-fit:cover;
+    border-radius:28px;
+    display:block;
+}
+
+.dob-box{
+    background:rgba(255,255,255,.22);
+    padding:14px 26px;
+    border-radius:22px;
+    font-size:22px;
+    font-weight:700;
+    margin:15px 0;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:18px;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.gallery-item{
+    background:rgba(255,255,255,.16);
+    padding:10px;
+    border-radius:22px;
+    backdrop-filter:blur(6px);
+    transition:.25s ease;
+}
+
+.gallery-item:hover{
+    transform:translateY(-6px) rotate(-1deg);
+}
+
 .gallery img{
     width:100%;
-    height:210px;
+    height:230px;
     object-fit:cover;
-    border-radius:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.35);
+    border-radius:17px;
+    box-shadow:0 8px 20px rgba(0,0,0,.30);
+    display:block;
 }
+
 .caption{
     background:white;
-    color:#ff006e;
+    color:var(--pink-dark);
     padding:10px;
-    border-radius:15px;
-    font-weight:bold;
-    margin-top:6px;
+    border-radius:14px;
+    font-weight:800;
+    margin-top:8px;
 }
+
 .reason{
-    background:#ffe6f0;
+    background:linear-gradient(135deg,#ffe6f0,#fff7fb);
     margin:12px;
-    padding:15px;
-    border-radius:15px;
+    padding:16px;
+    border-radius:16px;
     font-size:20px;
+    box-shadow:0 6px 15px rgba(230,0,92,.10);
 }
+
 .final{
     font-size:34px;
+    color:var(--pink-dark);
+    font-weight:900;
     animation:zoom 1s infinite alternate;
 }
+
 @keyframes zoom{
     from{transform:scale(1);}
-    to{transform:scale(1.08);}
+    to{transform:scale(1.05);}
 }
+
 .heart{
     position:fixed;
-    bottom:-20px;
-    color:white;
+    bottom:-30px;
     font-size:25px;
-    animation:floatUp 5s linear infinite;
+    animation:floatUp 5s linear forwards;
     pointer-events:none;
+    z-index:9999;
 }
+
 @keyframes floatUp{
-    0%{transform:translateY(0);opacity:1;}
-    100%{transform:translateY(-100vh);opacity:0;}
+    0%{transform:translateY(0) rotate(0deg);opacity:1;}
+    100%{transform:translateY(-110vh) rotate(360deg);opacity:0;}
 }
+
 #loveValue{
-    font-size:36px;
-    font-weight:bold;
-}
-.balloon{
-    font-size:75px;
-    cursor:pointer;
-    display:inline-block;
-    margin:10px;
-}
-.dob-box{
-    background:rgba(255,255,255,.25);
-    padding:14px 25px;
-    border-radius:20px;
-    font-size:21px;
+    font-size:42px;
+    font-weight:900;
     margin:15px 0;
 }
+
+.balloon-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+    margin:25px 0;
+    min-height:150px;
+}
+
+.balloon{
+    font-size:82px;
+    cursor:pointer;
+    display:inline-block;
+    transition:.2s ease;
+    animation:balloonFloat 1.8s ease-in-out infinite alternate;
+    filter:drop-shadow(0 12px 12px rgba(0,0,0,.20));
+    user-select:none;
+}
+
+.balloon:nth-child(2){animation-delay:.25s;}
+.balloon:nth-child(3){animation-delay:.5s;}
+.balloon:nth-child(4){animation-delay:.75s;}
+
+.balloon:hover{
+    transform:scale(1.12);
+}
+
+@keyframes balloonFloat{
+    from{transform:translateY(0) rotate(-4deg);}
+    to{transform:translateY(-16px) rotate(4deg);}
+}
+
+.balloon.popped{
+    animation:pop .35s ease forwards;
+    pointer-events:none;
+}
+
+@keyframes pop{
+    0%{transform:scale(1);opacity:1;}
+    55%{transform:scale(1.45);opacity:.9;}
+    100%{transform:scale(0);opacity:0;}
+}
+
+.word-box{
+    min-height:95px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:15px auto;
+}
+
+.balloon-word{
+    display:none;
+    font-size:clamp(36px,8vw,72px);
+    font-weight:1000;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    color:#fff7a8;
+    text-shadow:0 5px 18px rgba(0,0,0,.30);
+    animation:wordPop .55s ease;
+}
+
+.balloon-word.show{
+    display:block;
+}
+
+@keyframes wordPop{
+    0%{transform:scale(.2) rotate(-8deg);opacity:0;}
+    70%{transform:scale(1.16) rotate(3deg);opacity:1;}
+    100%{transform:scale(1) rotate(0deg);}
+}
+
+.complete-message{
+    display:none;
+    font-size:clamp(28px,6vw,52px);
+    font-weight:1000;
+    color:#fff;
+    text-shadow:0 6px 18px rgba(0,0,0,.28);
+    margin:15px 0 8px;
+    animation:wordPop .6s ease;
+}
+
+.complete-message.show{
+    display:block;
+}
+
+.sparkle{
+    position:fixed;
+    pointer-events:none;
+    z-index:9999;
+    animation:sparkleFly 850ms ease-out forwards;
+}
+
+@keyframes sparkleFly{
+    from{transform:translate(0,0) scale(1);opacity:1;}
+    to{transform:translate(var(--x),var(--y)) scale(0);opacity:0;}
+}
+
 @media(max-width:600px){
-    h1{font-size:30px;}
-    .main-photo{width:220px;height:280px;}
+    h1{font-size:32px;}
+    h2{font-size:22px;}
+    .gift{font-size:105px;}
+    .main-photo{
+        width:min(330px,86vw);
+        height:430px;
+    }
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
     .gallery img{height:190px;}
+    .balloon{font-size:66px;}
+    .card{padding:24px 18px;}
 }
 </style>
 </head>
@@ -171,65 +414,93 @@ section{
 <body>
 
 <div id="step1" class="page active">
-    <div class="gift">🎁</div>
-    <h1>Birthday Surprise ❤️</h1>
-    <h2>Who is your favourite person?</h2>
-    <input type="text" id="favPerson" placeholder="Enter name">
-    <br>
-    <button onclick="checkName()">Open Surprise ❤️</button>
-    <p id="msg"></p>
+    <div class="content-layer">
+        <div class="gift">🎁</div>
+        <h1>Birthday Surprise ❤️</h1>
+        <h2>Who is your favourite person?</h2>
+        <input type="text" id="favPerson" placeholder="Enter name" autocomplete="off">
+        <br>
+        <button onclick="checkName()">Open Surprise ❤️</button>
+        <p id="msg"></p>
+    </div>
 </div>
 
 <div id="step2" class="page">
-    <h1>💖 How much do you love me?</h1>
-    <input type="range" min="0" max="100" value="0" id="loveRange" oninput="showLove()">
-    <p id="loveValue">0%</p>
-    <p id="loveMsg"></p>
-    <button onclick="checkLove()">Next ❤️</button>
+    <div class="content-layer">
+        <h1>💖 How much do you love me?</h1>
+        <input type="range" min="0" max="100" value="0" id="loveRange" oninput="showLove()">
+        <p id="loveValue">0%</p>
+        <p id="loveMsg"></p>
+        <button onclick="checkLove()">Next ❤️</button>
+    </div>
 </div>
 
 <div id="step3" class="page">
-    <h1>Will you love me forever? ❤️</h1>
-    <button onclick="nextStep(4)">YES ❤️</button>
-    <button onclick="nextStep(4)">OF COURSE 💖</button>
-    <button onclick="nextStep(4)">ALWAYS 😍</button>
+    <div class="content-layer">
+        <h1>Will you love me forever? ❤️</h1>
+        <button onclick="nextStep(4)">YES ❤️</button>
+        <button onclick="nextStep(4)">OF COURSE 💖</button>
+        <button onclick="nextStep(4)">ALWAYS 😍</button>
+    </div>
 </div>
 
 <div id="step4" class="page">
-    <h1>Find My Heart ❤️</h1>
-    <p>Click the correct heart</p>
-    <button onclick="wrongHeart()">🤍</button>
-    <button onclick="nextStep(5)">❤️</button>
-    <button onclick="wrongHeart()">💙</button>
-    <p id="heartMsg"></p>
+    <div class="content-layer">
+        <h1>Find My Heart ❤️</h1>
+        <p>Click the correct heart</p>
+        <button onclick="wrongHeart()">🤍</button>
+        <button onclick="nextStep(5)">❤️</button>
+        <button onclick="wrongHeart()">💙</button>
+        <p id="heartMsg"></p>
+    </div>
 </div>
 
 <div id="step5" class="page">
-    <h1>🎂 Cake Cutting Time</h1>
-    <div style="font-size:120px; cursor:pointer;" onclick="nextStep(6)">🎂</div>
-    <p>Click the cake, My Dear Varsha ❤️</p>
+    <div class="content-layer">
+        <h1>🎂 Cake Cutting Time</h1>
+        <div style="font-size:130px;cursor:pointer;filter:drop-shadow(0 14px 18px rgba(0,0,0,.22));"
+             onclick="nextStep(6)">🎂</div>
+        <p style="font-size:21px;">Click the cake, My Dear Varsha ❤️</p>
+    </div>
 </div>
 
 <div id="step6" class="page">
-    <h1>🎈 Pop the Balloons</h1>
-    <div>
-        <span class="balloon" onclick="popBalloon(this)">🎈</span>
-        <span class="balloon" onclick="popBalloon(this)">🎈</span>
-        <span class="balloon" onclick="popBalloon(this)">🎈</span>
-        <span class="balloon" onclick="popBalloon(this)">🎈</span>
+    <div class="content-layer">
+        <h1>🎈 Pop the Balloons One by One</h1>
+
+        <div class="balloon-wrap">
+            <span class="balloon" data-word="YOU" onclick="popBalloon(this)">🎈</span>
+            <span class="balloon" data-word="ARE" onclick="popBalloon(this)">🎈</span>
+            <span class="balloon" data-word="MY" onclick="popBalloon(this)">🎈</span>
+            <span class="balloon" data-word="FAVOURITE" onclick="popBalloon(this)">🎈</span>
+        </div>
+
+        <div class="word-box">
+            <div id="balloonWord" class="balloon-word"></div>
+        </div>
+
+        <div id="completeMessage" class="complete-message">
+            YOU ARE MY FAVOURITE ❤️
+        </div>
+
+        <p id="balloonMsg">Pop the first balloon ❤️</p>
+        <button id="balloonNext" style="display:none;" onclick="showMain()">
+            Final Surprise ❤️
+        </button>
     </div>
-    <p id="balloonMsg"></p>
-    <button id="balloonNext" style="display:none;" onclick="showMain()">Final Surprise ❤️</button>
 </div>
 
 <div id="mainContent">
 
-<section>
+<section class="hero-section">
     <h1>🎂 Happy 23rd Birthday, My Dear Varsha ❤️</h1>
     <div class="dob-box">DOB: 25/07/2003</div>
-    <img src="girl.jpeg" class="main-photo" alt="My Dear Varsha">
 
-    <p style="font-size:24px; max-width:800px; margin:auto; line-height:36px;">
+    <div class="photo-frame">
+        <img src="girl.jpeg" class="main-photo" alt="My Dear Varsha">
+    </div>
+
+    <p style="font-size:24px;max-width:820px;margin:20px auto;line-height:38px;">
         Today is not just your birthday.<br>
         It is the beautiful day my favourite person came into this world ❤️
     </p>
@@ -238,7 +509,7 @@ section{
 <section>
     <div class="card">
         <h1>💌 My Dear Varshuuu</h1>
-        <p style="font-size:21px; line-height:36px;">
+        <p style="font-size:21px;line-height:36px;">
             Happy 23rd Birthday, My Dear Varsha ❤️<br><br>
 
             You are the most beautiful part of my life.
@@ -276,35 +547,35 @@ section{
 </section>
 
 <section>
-    <h1>📸 Our 10 Beautiful Memories ❤️</h1>
+    <h1>📸 Our 23 Beautiful Memories ❤️</h1>
 
     <div class="gallery">
-        <div><img src="photo1.jpeg" alt="Memory 1"><div class="caption">Memory 1 ❤️</div></div>
-        <div><img src="photo2.jpeg" alt="Memory 2"><div class="caption">Memory 2 ❤️</div></div>
-        <div><img src="photo3.jpeg" alt="Memory 3"><div class="caption">Memory 3 ❤️</div></div>
-        <div><img src="photo4.jpeg" alt="Memory 4"><div class="caption">Memory 4 ❤️</div></div>
-        <div><img src="photo5.jpeg" alt="Memory 5"><div class="caption">Memory 5 ❤️</div></div>
-        <div><img src="photo6.jpeg" alt="Memory 6"><div class="caption">Memory 6 ❤️</div></div>
-        <div><img src="photo7.jpeg" alt="Memory 7"><div class="caption">Memory 7 ❤️</div></div>
-        <div><img src="photo8.jpeg" alt="Memory 8"><div class="caption">Memory 8 ❤️</div></div>
-        <div><img src="photo9.jpeg" alt="Memory 9"><div class="caption">Memory 9 ❤️</div></div>
-        <div><img src="photo10.jpeg" alt="Memory 10"><div class="caption">Memory 10 ❤️</div></div>
-<div><img src="photo11.jpeg" alt="Memory 11"><div class="caption">Memory 11 ❤️</div></div>
-<div><img src="photo12.jpeg" alt="Memory 12"><div class="caption">Memory 12 ❤️</div></div>
-<div><img src="photo13.jpeg" alt="Memory 13"><div class="caption">Memory 13 ❤️</div></div>
-<div><img src="photo14.jpeg" alt="Memory 14"><div class="caption">Memory 14 ❤️</div></div>
-<div><img src="photo15.jpeg" alt="Memory 15"><div class="caption">Memory 15 ❤️</div></div>
-<div><img src="photo16.jpeg" alt="Memory 16"><div class="caption">Memory 16 ❤️</div></div>
-<div><img src="photo17.jpeg" alt="Memory 17"><div class="caption">Memory 17 ❤️</div></div>
-<div><img src="photo18.jpeg" alt="Memory 18"><div class="caption">Memory 18 ❤️</div></div>
-<div><img src="photo19.jpeg" alt="Memory 19"><div class="caption">Memory 19 ❤️</div></div>
-<div><img src="photo20.jpeg" alt="Memory 20"><div class="caption">Memory 20 ❤️</div></div>
-<div><img src="photo21.jpeg" alt="Memory 21"><div class="caption">Memory 21 ❤️</div></div>
-<div><img src="photo22.jpeg" alt="Memory 22"><div class="caption">Memory 22 ❤️</div></div>
-<div><img src="photo23.jpeg" alt="Memory 23"><div class="caption">Memory 23 ❤️</div></div>
+        <div class="gallery-item"><img src="photo1.jpeg" alt="Memory 1"><div class="caption">Memory 1 ❤️</div></div>
+        <div class="gallery-item"><img src="photo2.jpeg" alt="Memory 2"><div class="caption">Memory 2 ❤️</div></div>
+        <div class="gallery-item"><img src="photo3.jpeg" alt="Memory 3"><div class="caption">Memory 3 ❤️</div></div>
+        <div class="gallery-item"><img src="photo4.jpeg" alt="Memory 4"><div class="caption">Memory 4 ❤️</div></div>
+        <div class="gallery-item"><img src="photo5.jpeg" alt="Memory 5"><div class="caption">Memory 5 ❤️</div></div>
+        <div class="gallery-item"><img src="photo6.jpeg" alt="Memory 6"><div class="caption">Memory 6 ❤️</div></div>
+        <div class="gallery-item"><img src="photo7.jpeg" alt="Memory 7"><div class="caption">Memory 7 ❤️</div></div>
+        <div class="gallery-item"><img src="photo8.jpeg" alt="Memory 8"><div class="caption">Memory 8 ❤️</div></div>
+        <div class="gallery-item"><img src="photo9.jpeg" alt="Memory 9"><div class="caption">Memory 9 ❤️</div></div>
+        <div class="gallery-item"><img src="photo10.jpeg" alt="Memory 10"><div class="caption">Memory 10 ❤️</div></div>
+        <div class="gallery-item"><img src="photo11.jpeg" alt="Memory 11"><div class="caption">Memory 11 ❤️</div></div>
+        <div class="gallery-item"><img src="photo12.jpeg" alt="Memory 12"><div class="caption">Memory 12 ❤️</div></div>
+        <div class="gallery-item"><img src="photo13.jpeg" alt="Memory 13"><div class="caption">Memory 13 ❤️</div></div>
+        <div class="gallery-item"><img src="photo14.jpeg" alt="Memory 14"><div class="caption">Memory 14 ❤️</div></div>
+        <div class="gallery-item"><img src="photo15.jpeg" alt="Memory 15"><div class="caption">Memory 15 ❤️</div></div>
+        <div class="gallery-item"><img src="photo16.jpeg" alt="Memory 16"><div class="caption">Memory 16 ❤️</div></div>
+        <div class="gallery-item"><img src="photo17.jpeg" alt="Memory 17"><div class="caption">Memory 17 ❤️</div></div>
+        <div class="gallery-item"><img src="photo18.jpeg" alt="Memory 18"><div class="caption">Memory 18 ❤️</div></div>
+        <div class="gallery-item"><img src="photo19.jpeg" alt="Memory 19"><div class="caption">Memory 19 ❤️</div></div>
+        <div class="gallery-item"><img src="photo20.jpeg" alt="Memory 20"><div class="caption">Memory 20 ❤️</div></div>
+        <div class="gallery-item"><img src="photo21.jpeg" alt="Memory 21"><div class="caption">Memory 21 ❤️</div></div>
+        <div class="gallery-item"><img src="photo22.jpeg" alt="Memory 22"><div class="caption">Memory 22 ❤️</div></div>
+        <div class="gallery-item"><img src="photo23.jpeg" alt="Memory 23"><div class="caption">Memory 23 ❤️</div></div>
     </div>
 
-    <p style="font-size:22px;">
+    <p style="font-size:23px;">
         Every photo is a beautiful page in our love story ❤️
     </p>
 </section>
@@ -323,77 +594,159 @@ section{
 
 <script>
 let popped = 0;
+const balloonWords = ["YOU", "ARE", "MY", "FAVOURITE"];
 
 function checkName(){
-    var name = document.getElementById("favPerson").value.trim().toLowerCase();
+    const name = document.getElementById("favPerson").value.trim().toLowerCase();
 
     if(name === "ajith"){
         nextStep(2);
     }else{
         document.getElementById("msg").innerHTML =
-        "❌ Wrong answer! Only your favourite person can unlock this surprise ❤️";
+            "❌ Wrong answer! Only your favourite person can unlock this surprise ❤️";
     }
 }
 
 function showLove(){
-    var value = document.getElementById("loveRange").value;
+    const value = document.getElementById("loveRange").value;
     document.getElementById("loveValue").innerHTML = value + "%";
 
     if(value < 100){
-        document.getElementById("loveMsg").innerHTML = "Only " + value + "%? Try 100% ❤️";
+        document.getElementById("loveMsg").innerHTML =
+            "Only " + value + "%? Move it to 100% ❤️";
     }else{
-        document.getElementById("loveMsg").innerHTML = "Awww! I knew it ❤️";
+        document.getElementById("loveMsg").innerHTML =
+            "Awww! I knew it ❤️";
     }
 }
 
 function checkLove(){
-    var value = document.getElementById("loveRange").value;
+    const value = document.getElementById("loveRange").value;
+
     if(value == 100){
         nextStep(3);
     }else{
-        document.getElementById("loveMsg").innerHTML = "Set it to 100% to continue ❤️";
+        document.getElementById("loveMsg").innerHTML =
+            "Set it to 100% to continue ❤️";
     }
 }
 
 function nextStep(step){
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
     document.getElementById("step" + step).classList.add("active");
 }
 
 function wrongHeart(){
-    document.getElementById("heartMsg").innerHTML = "Oops! My heart is red ❤️";
+    document.getElementById("heartMsg").innerHTML =
+        "Oops! My heart is always red for you ❤️";
 }
 
 function popBalloon(el){
-    el.style.visibility = "hidden";
+    const balloons = Array.from(document.querySelectorAll(".balloon"));
+    const currentBalloon = balloons[popped];
+
+    if(el !== currentBalloon){
+        document.getElementById("balloonMsg").innerHTML =
+            "Pop the balloons from left to right ❤️";
+        return;
+    }
+
+    if(el.classList.contains("popped")){
+        return;
+    }
+
+    const word = balloonWords[popped];
+
+    el.classList.add("popped");
+    showBalloonWord(word);
+    createSparkles(el);
+
     popped++;
 
-    if(popped >= 4){
-        document.getElementById("balloonMsg").innerHTML = "All balloons popped! Surprise ready ❤️";
-        document.getElementById("balloonNext").style.display = "inline-block";
+    if(popped < balloonWords.length){
+        document.getElementById("balloonMsg").innerHTML =
+            "Beautiful! Now pop the next balloon ❤️";
+    }else{
+        setTimeout(() => {
+            document.getElementById("balloonWord").classList.remove("show");
+            document.getElementById("completeMessage").classList.add("show");
+            document.getElementById("balloonMsg").innerHTML =
+                "You are always my favourite person ❤️";
+            document.getElementById("balloonNext").style.display = "inline-block";
+            createHeartsBurst();
+        }, 650);
+    }
+}
+
+function showBalloonWord(word){
+    const wordBox = document.getElementById("balloonWord");
+
+    wordBox.classList.remove("show");
+    wordBox.innerHTML = word;
+
+    void wordBox.offsetWidth;
+    wordBox.classList.add("show");
+}
+
+function createSparkles(element){
+    const rect = element.getBoundingClientRect();
+    const symbols = ["✨","💖","⭐","❤️"];
+
+    for(let i = 0; i < 16; i++){
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+        sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
+        sparkle.style.left = (rect.left + rect.width / 2) + "px";
+        sparkle.style.top = (rect.top + rect.height / 2) + "px";
+        sparkle.style.setProperty("--x", ((Math.random() - .5) * 240) + "px");
+        sparkle.style.setProperty("--y", ((Math.random() - .5) * 220) + "px");
+        sparkle.style.fontSize = (16 + Math.random() * 18) + "px";
+
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 900);
+    }
+}
+
+function createHeartsBurst(){
+    for(let i = 0; i < 24; i++){
+        setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = Math.random() > .25 ? "❤️" : "💖";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5200);
+        }, i * 70);
     }
 }
 
 function showMain(){
-    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+    document.querySelectorAll(".page").forEach(page => {
+        page.style.display = "none";
+    });
+
     document.getElementById("mainContent").style.display = "block";
     createHearts();
-    window.scrollTo(0,0);
+    window.scrollTo({top:0, behavior:"smooth"});
 }
 
 function createHearts(){
-    setInterval(function(){
+    setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = "❤️";
+        heart.innerHTML = Math.random() > .2 ? "❤️" : "💖";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (18 + Math.random() * 25) + "px";
+        heart.style.fontSize = (18 + Math.random() * 26) + "px";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
-    }, 500);
+        setTimeout(() => heart.remove(), 5000);
+    }, 520);
 }
 </script>
 
