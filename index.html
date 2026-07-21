@@ -308,7 +308,7 @@ section{
     cursor:pointer;
     display:inline-block;
     transition:.2s ease;
-    animation:balloonFloat 1.8s ease-in-out infinite alternate;
+    animation:balloonFloat 2.6s ease-in-out infinite alternate;
     filter:drop-shadow(0 12px 12px rgba(0,0,0,.20));
     user-select:none;
 }
@@ -323,7 +323,7 @@ section{
 
 @keyframes balloonFloat{
     from{transform:translateY(0) rotate(-4deg);}
-    to{transform:translateY(-16px) rotate(4deg);}
+    to{transform:translateY(-9px) rotate(2deg);}
 }
 
 .balloon.popped{
@@ -466,6 +466,173 @@ section{
     margin-bottom:12px;
 }
 
+
+
+/* ===== Subtle romantic animations only ===== */
+.page.active .content-layer{
+    animation:softEnter .48s ease both;
+}
+
+@keyframes softEnter{
+    from{opacity:0;transform:translateY(18px) scale(.985);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.question-kicker{
+    display:inline-block;
+    margin-bottom:10px;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);
+    font-weight:800;
+    letter-spacing:.3px;
+}
+
+.funny-word{
+    max-width:760px;
+    margin:12px auto 18px;
+    font-size:21px;
+    line-height:1.65;
+    color:#fff8b5;
+    font-weight:800;
+    text-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+
+.final-reveal-box{
+    width:min(860px,94vw);
+    margin:auto;
+    padding:34px 28px;
+    border-radius:30px;
+    background:rgba(255,255,255,.95);
+    color:#4a1730;
+    box-shadow:0 20px 55px rgba(0,0,0,.30);
+    position:relative;
+    overflow:hidden;
+}
+
+.final-reveal-box::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.65) 48%,transparent 72%);
+    transform:translateX(-130%);
+    animation:softShine 4.5s ease-in-out infinite;
+    pointer-events:none;
+}
+
+@keyframes softShine{
+    0%,68%{transform:translateX(-130%);}
+    100%{transform:translateX(130%);}
+}
+
+.final-reveal-box h1{
+    color:var(--pink-dark);
+    text-shadow:none;
+    margin-bottom:18px;
+}
+
+#romanticFinalText{
+    position:relative;
+    z-index:1;
+    min-height:270px;
+    margin:0 auto;
+    max-width:760px;
+    text-align:left;
+    white-space:pre-wrap;
+    font-size:clamp(19px,3vw,25px);
+    line-height:1.85;
+    font-weight:700;
+}
+
+.typing-cursor::after{
+    content:"|";
+    color:var(--pink-dark);
+    animation:cursorBlink .75s infinite;
+}
+
+@keyframes cursorBlink{
+    50%{opacity:0;}
+}
+
+#finalMemoriesBtn{
+    position:relative;
+    z-index:2;
+    display:none;
+    margin-top:20px;
+    background:linear-gradient(135deg,#ff4f87,#9b5de5);
+    color:#fff;
+}
+
+.mini-love-line{
+    font-size:18px;
+    line-height:1.6;
+    margin:8px auto 4px;
+    color:#fff6a8;
+    font-weight:800;
+}
+
+
+.future-photo-box{
+    max-width:760px;
+    margin:18px auto 0;
+    padding:28px 22px;
+    border-radius:28px;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+
+.future-photo-frame{
+    display:none;
+    margin:18px auto 12px;
+    width:min(360px,84vw);
+    height:440px;
+    border-radius:28px;
+    overflow:hidden;
+    background:rgba(255,255,255,.16);
+    padding:10px;
+    box-shadow:0 14px 34px rgba(0,0,0,.22);
+}
+
+.future-photo-frame.show{
+    display:block;
+    animation:softReveal .45s ease;
+}
+
+.future-photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:22px;
+    display:block;
+}
+
+.future-photo-caption{
+    min-height:34px;
+    font-size:18px;
+    font-weight:800;
+    color:#fff7bf;
+    margin:8px auto 10px;
+}
+
+.future-photo-counter{
+    font-size:14px;
+    color:#fff;
+    opacity:.92;
+    margin-top:8px;
+}
+
+.future-photo-btn{
+    background:linear-gradient(135deg,#ff4f87,#9b5de5);
+    color:#fff;
+}
+
+@keyframes softReveal{
+    from{transform:scale(.94) translateY(12px);opacity:0;}
+    to{transform:scale(1) translateY(0);opacity:1;}
+}
+
 @media(max-width:600px){
     h1{font-size:32px;}
     h2{font-size:22px;}
@@ -481,11 +648,16 @@ section{
     .gallery img{height:190px;}
     .balloon{font-size:66px;}
     .card{padding:24px 18px;}
+    .final-reveal-box{padding:26px 18px;}
+    #romanticFinalText{min-height:330px;text-align:center;font-size:19px;}
+    .future-photo-frame{height:400px;}
 }
+
 </style>
 </head>
 
 <body>
+
 
 <div id="step1" class="page active">
     <div class="content-layer">
@@ -501,43 +673,102 @@ section{
 
 <div id="step2" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 2 ❤️</div>
-        <h1>🍽️ What are you eating today?</h1>
-        <p class="question-note">Choose your birthday food, My Dear Varsha 😋</p>
-
-        <div id="foodChoices" class="choice-grid">
-            <button class="choice-btn" onclick="selectFood(this,'Mutton Biriyani')">🍖 Mutton Biriyani</button>
-            <button class="choice-btn" onclick="selectFood(this,'Chicken Biriyani')">🍗 Chicken Biriyani</button>
-            <button class="choice-btn" onclick="selectFood(this,'Other')">🍽️ Other</button>
+        <div class="question-kicker">Cute Question 1 💕</div>
+        <h1>👑 In our love story, who is the boss?</h1>
+        <p class="funny-word">Think carefully... wrong answer-ku appeal option illa 😜</p>
+        <div id="bossChoices" class="choice-grid">
+            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Correct! Varsha Madam is the boss... but Ajith is the secret manager 😎❤️')">Varsha Madam 👑</button>
+            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Nice try! Ajith boss-nu sonnaalum final decision Varsha kitta dhaan 😜')">Ajith Sir 😎</button>
+            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Best answer! Official boss Varsha... unofficial troublemaker Ajith 😂❤️')">Obviously Varsha 😍</button>
         </div>
-
-        <div id="otherFoodWrap">
-            <input type="text" id="otherFood" placeholder="Tell me what you want 😋" autocomplete="off">
-        </div>
-
-        <p id="foodMsg" class="answer-message">Select one delicious option ❤️</p>
-        <button id="foodNext" style="display:none;" onclick="continueFood()">Next Question ❤️</button>
+        <p id="bossMsg" class="answer-message">Select the safest answer 😄❤️</p>
+        <button id="bossNext" style="display:none;" onclick="nextStep(3)">Next Cute Question ❤️</button>
     </div>
 </div>
 
 <div id="step3" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 3 ❤️</div>
-        <h1>🏖️ Do you want to go to the beach today?</h1>
-        <p class="question-note">Be careful... only one answer is accepted 😜</p>
-
-        <div id="beachZone" class="no-zone">
-            <button id="beachYes" onclick="acceptBeach()">YES! LET'S GO 🏖️❤️</button>
-            <button id="beachNo" onmouseenter="moveNoButton()" onclick="moveNoButton()">NO 🙈</button>
+        <div class="question-kicker">Cute Question 2 💞</div>
+        <h1>🥹 When I say “I miss you”, what should you do?</h1>
+        <p class="funny-word">One small warning: “Seen” pottutu poidradhu answer illa 😜</p>
+        <div id="missChoices" class="choice-grid">
+            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Call me immediately... your voice is my favourite notification ❤️')">Call Me 📞</button>
+            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Meet me soon... distance-ku today leave kuduthudalam 😍')">Meet Me 🤗</button>
+            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Correct answer! Call + meet + one tight hug... no excuses 😜❤️')">Both 💖</button>
         </div>
-
-        <p id="beachMsg" class="answer-message">Choose wisely, birthday girl 😍</p>
+        <p id="missMsg" class="answer-message">Choose without overthinking, senior madam 😍</p>
+        <button id="missNext" style="display:none;" onclick="nextStep(4)">One More ❤️</button>
     </div>
 </div>
 
 <div id="step4" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 4 ❤️</div>
+        <div class="question-kicker">Funny Love Question 😄</div>
+        <h1>🎬 What is our love-story title?</h1>
+        <p class="funny-word">Love-la nee senior... aana unna adhigama love panrathu naan dhaan 😎❤️</p>
+        <div id="titleChoices" class="choice-grid">
+            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Super title! Senior Madam & Junior Hero — blockbuster confirmed 🎬❤️')">Senior Madam & Junior Hero 🎥</button>
+            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Cute! Naanum En Queen-um — daily romance, daily comedy 👑😂')">Naanum En Queen-um 👑</button>
+            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Perfect! Next year marriage edition release aagum 💍❤️')">Next Year: Marriage Edition 💍</button>
+        </div>
+        <p id="titleMsg" class="answer-message">Choose our movie title ❤️</p>
+        <button id="titleNext" style="display:none;" onclick="nextStep(5)">Continue Surprise ❤️</button>
+    </div>
+</div>
+
+</div>
+
+<div id="step5" class="page">
+    <div class="content-layer">
+        <div class="step-count">Special Click ❤️</div>
+        <h1>📸 Our Future Photo</h1>
+        <p class="question-note">Click pannina namma single future photo open aagum ❤️</p>
+        <div class="future-photo-box">
+            <button id="futurePhotoBtn" class="future-photo-btn" onclick="showFuturePhoto()">Open Our Future Photo ❤️</button>
+            <div id="futurePhotoFrame" class="future-photo-frame">
+                <img id="futurePhotoImg" src="photo1.png" alt="Our Future Photo">
+            </div>
+            <p id="futurePhotoCaption" class="future-photo-caption">Click to open our future photo ❤️</p>
+            <div id="futurePhotoCounter" class="future-photo-counter"></div>
+            <button id="futurePhotoNext" style="display:none;" onclick="nextStep(6)">Next Question ❤️</button>
+        </div>
+    </div>
+</div>
+
+<div id="step6" class="page">
+    <div class="content-layer">
+        <div class="step-count">Question 5 ❤️</div>
+        <h1>🍽️ What are you eating today?</h1>
+        <p class="question-note">Choose your birthday food, My Dear Varsha 😋</p>
+        <div id="foodChoices" class="choice-grid">
+            <button class="choice-btn" onclick="selectFood(this,'Mutton Biriyani')">🍖 Mutton Biriyani</button>
+            <button class="choice-btn" onclick="selectFood(this,'Chicken Biriyani')">🍗 Chicken Biriyani</button>
+            <button class="choice-btn" onclick="selectFood(this,'Other')">🍽️ Other</button>
+        </div>
+        <div id="otherFoodWrap">
+            <input type="text" id="otherFood" placeholder="Tell me what you want 😋" autocomplete="off">
+        </div>
+        <p id="foodMsg" class="answer-message">Select one delicious option ❤️</p>
+        <button id="foodNext" style="display:none;" onclick="continueFood()">Next Question ❤️</button>
+    </div>
+</div>
+
+<div id="step7" class="page">
+    <div class="content-layer">
+        <div class="step-count">Question 6 ❤️</div>
+        <h1>🏖️ Do you want to go to the beach today?</h1>
+        <p class="question-note">Be careful... only one answer is accepted 😜</p>
+        <div id="beachZone" class="no-zone">
+            <button id="beachYes" onclick="acceptBeach()">YES! LET'S GO 🏖️❤️</button>
+            <button id="beachNo" onmouseenter="moveNoButton()" onclick="moveNoButton()">NO 🙈</button>
+        </div>
+        <p id="beachMsg" class="answer-message">Choose wisely, birthday girl 😍</p>
+    </div>
+</div>
+
+<div id="step8" class="page">
+    <div class="content-layer">
+        <div class="step-count">Question 7 ❤️</div>
         <h1>🌅 Which beach moment do you want with me?</h1>
         <div id="momentChoices" class="choice-grid">
             <button class="choice-btn" onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Holding your hand near the waves will be perfect ❤️')">🤝 Holding Hands</button>
@@ -545,13 +776,13 @@ section{
             <button class="choice-btn" onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Sitting and talking with you is my favourite kind of peace 💖')">🌊 Sit & Talk</button>
         </div>
         <p id="momentMsg" class="answer-message">Pick our perfect beach moment ❤️</p>
-        <button id="momentNext" style="display:none;" onclick="nextStep(5)">Lovely Choice ❤️</button>
+        <button id="momentNext" style="display:none;" onclick="nextStep(9)">Lovely Choice ❤️</button>
     </div>
 </div>
 
-<div id="step5" class="page">
+<div id="step9" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 5 ❤️</div>
+        <div class="step-count">Question 8 ❤️</div>
         <h1>✨ What should we do after the beach?</h1>
         <div id="planChoices" class="choice-grid">
             <button class="choice-btn" onclick="chooseOption(this,'planChoices','planMsg','planNext','Long drive with your favourite songs... deal! 🚗❤️')">🚗 Long Drive</button>
@@ -559,13 +790,13 @@ section{
             <button class="choice-btn" onclick="chooseOption(this,'planChoices','planMsg','planNext','Both? Best answer! Today is completely yours 😍')">💞 Both</button>
         </div>
         <p id="planMsg" class="answer-message">You can choose anything... today is your day ❤️</p>
-        <button id="planNext" style="display:none;" onclick="nextStep(6)">Next Surprise ❤️</button>
+        <button id="planNext" style="display:none;" onclick="nextStep(10)">Next Surprise ❤️</button>
     </div>
 </div>
 
-<div id="step6" class="page">
+<div id="step10" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 6 ❤️</div>
+        <div class="step-count">Question 9 ❤️</div>
         <h1>🤗 How many hugs do you want today?</h1>
         <div id="hugChoices" class="choice-grid">
             <button class="choice-btn" onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Only 10? I will secretly give you more 😜❤️')">10 Hugs 🤗</button>
@@ -573,13 +804,13 @@ section{
             <button class="choice-btn" onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Unlimited hugs forever—that is the correct answer ❤️')">Unlimited ♾️❤️</button>
         </div>
         <p id="hugMsg" class="answer-message">Choose carefully... hugs cannot be returned 😍</p>
-        <button id="hugNext" style="display:none;" onclick="nextStep(7)">Continue ❤️</button>
+        <button id="hugNext" style="display:none;" onclick="nextStep(11)">Continue ❤️</button>
     </div>
 </div>
 
-<div id="step7" class="page">
+<div id="step11" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 7 ❤️</div>
+        <div class="step-count">Question 10 ❤️</div>
         <h1>💖 How much do you love me?</h1>
         <input type="range" min="0" max="100" value="0" id="loveRange" oninput="showLove()">
         <p id="loveValue">0%</p>
@@ -588,60 +819,63 @@ section{
     </div>
 </div>
 
-<div id="step8" class="page">
+<div id="step12" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 8 ❤️</div>
+        <div class="step-count">Question 11 ❤️</div>
         <h1>Will you love me forever? ❤️</h1>
-        <button onclick="nextStep(9)">YES ❤️</button>
-        <button onclick="nextStep(9)">OF COURSE 💖</button>
-        <button onclick="nextStep(9)">ALWAYS 😍</button>
+        <button onclick="nextStep(13)">YES ❤️</button>
+        <button onclick="nextStep(13)">OF COURSE 💖</button>
+        <button onclick="nextStep(13)">ALWAYS 😍</button>
     </div>
 </div>
 
-<div id="step9" class="page">
+<div id="step13" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 9 ❤️</div>
+        <div class="step-count">Question 12 ❤️</div>
         <h1>Find My Heart ❤️</h1>
         <p>Click the correct heart</p>
         <button onclick="wrongHeart()">🤍</button>
-        <button onclick="nextStep(10)">❤️</button>
+        <button onclick="nextStep(14)">❤️</button>
         <button onclick="wrongHeart()">💙</button>
         <p id="heartMsg"></p>
     </div>
 </div>
 
-<div id="step10" class="page">
+<div id="step14" class="page">
     <div class="content-layer">
         <h1>🎂 Cake Cutting Time</h1>
         <div style="font-size:130px;cursor:pointer;filter:drop-shadow(0 14px 18px rgba(0,0,0,.22));"
-             onclick="nextStep(11)">🎂</div>
+             onclick="nextStep(15)">🎂</div>
         <p style="font-size:21px;">Click the cake, My Dear Varsha ❤️</p>
     </div>
 </div>
 
-<div id="step11" class="page">
+<div id="step15" class="page">
     <div class="content-layer">
         <h1>🎈 Pop the Balloons One by One</h1>
-
         <div class="balloon-wrap">
             <span class="balloon" data-word="YOU" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="ARE" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="MY" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="FAVOURITE" onclick="popBalloon(this)">🎈</span>
         </div>
-
         <div class="word-box">
             <div id="balloonWord" class="balloon-word"></div>
         </div>
-
-        <div id="completeMessage" class="complete-message">
-            YOU ARE MY FAVOURITE ❤️
-        </div>
-
+        <div id="completeMessage" class="complete-message">YOU ARE MY FAVOURITE ❤️</div>
         <p id="balloonMsg">Pop the first balloon ❤️</p>
-        <button id="balloonNext" style="display:none;" onclick="showMain()">
-            Final Surprise ❤️
-        </button>
+        <button id="balloonNext" style="display:none;" onclick="nextStep(16)">Final Surprise ❤️</button>
+    </div>
+</div>
+
+<div id="step16" class="page">
+    <div class="content-layer">
+        <div class="final-reveal-box">
+            <h1>💌 A Message From Ajith</h1>
+            <p id="romanticFinalText" class="typing-cursor"></p>
+            <button id="finalMemoriesBtn" onclick="showMain()">Open Our Memories ❤️</button>
+        </div>
+        <p class="mini-love-line">Love-la nee senior... aana unna adhigama love panrathu naan dhaan 😜❤️</p>
     </div>
 </div>
 
@@ -764,14 +998,35 @@ section{
 
 </div>
 
+
 <script>
 let popped = 0;
 let selectedFood = "";
+let finalTypingStarted = false;
+let heartTimer = null;
+
+const futurePhoto = {
+    src: "photo1.png",
+    caption: "Our Future Photo ❤️ — Namma happiest future together."
+};
 const balloonWords = ["YOU", "ARE", "MY", "FAVOURITE"];
+
+const finalMessage = `Hi My Dear Varsha,
+
+Happy Birthday To Youuu ❤️
+
+It’s a wonderful day. Next year, we will be getting married 💍
+
+Nee enna vida senior-ah irukkalaam namma love-la, but naan dhaan unna vida adhigama love panren.
+
+Love-la nee senior... aana unna adhigama love panrathu naan dhaan 😜❤️
+
+You are my favourite person, my peace, my happiness, and my forever.
+
+Happy Birthday, My Dear Varsha ❤️`;
 
 function checkName(){
     const name = document.getElementById("favPerson").value.trim().toLowerCase();
-
     if(name === "ajith"){
         nextStep(2);
     }else{
@@ -781,10 +1036,7 @@ function checkName(){
 }
 
 function selectFood(button, food){
-    document.querySelectorAll("#foodChoices .choice-btn").forEach(btn => {
-        btn.classList.remove("selected");
-    });
-
+    document.querySelectorAll("#foodChoices .choice-btn").forEach(btn => btn.classList.remove("selected"));
     button.classList.add("selected");
     selectedFood = food;
 
@@ -805,7 +1057,6 @@ function selectFood(button, food){
 
 function continueFood(){
     const foodMsg = document.getElementById("foodMsg");
-
     if(!selectedFood){
         foodMsg.innerHTML = "Please choose one food first ❤️";
         return;
@@ -813,21 +1064,20 @@ function continueFood(){
 
     if(selectedFood === "Other"){
         const otherFood = document.getElementById("otherFood").value.trim();
-
         if(!otherFood){
             foodMsg.innerHTML = "Please type what you want to eat 😋";
             return;
         }
     }
 
-    nextStep(3);
+    nextStep(7);
 }
 
 function acceptBeach(){
     document.getElementById("beachMsg").innerHTML =
         "Yay! Beach date confirmed with Ajith 🏖️❤️";
-    createHeartsBurst();
-    setTimeout(() => nextStep(4), 650);
+    createHeartsBurst(10);
+    setTimeout(() => nextStep(8), 550);
 }
 
 function moveNoButton(){
@@ -839,58 +1089,73 @@ function moveNoButton(){
     noButton.style.right = "auto";
     noButton.style.left = Math.floor(Math.random() * maxLeft) + "px";
     noButton.style.top = Math.floor(Math.random() * maxTop) + "px";
-    noButton.style.transform = "rotate(" + (Math.random() * 18 - 9) + "deg)";
+    noButton.style.transform = "rotate(" + (Math.random() * 12 - 6) + "deg)";
 
     document.getElementById("beachMsg").innerHTML =
         "NO is not allowed 😜 Only YES can unlock the next question ❤️";
 }
 
 function chooseOption(button, groupId, messageId, nextButtonId, message){
-    document.querySelectorAll("#" + groupId + " .choice-btn").forEach(btn => {
-        btn.classList.remove("selected");
-    });
-
+    document.querySelectorAll("#" + groupId + " .choice-btn").forEach(btn => btn.classList.remove("selected"));
     button.classList.add("selected");
     document.getElementById(messageId).innerHTML = message;
     document.getElementById(nextButtonId).style.display = "inline-block";
-    createSparkles(button);
+    createSparkles(button, 7);
+}
+
+
+function showFuturePhoto(){
+    const frame = document.getElementById("futurePhotoFrame");
+    const img = document.getElementById("futurePhotoImg");
+    const caption = document.getElementById("futurePhotoCaption");
+    const counter = document.getElementById("futurePhotoCounter");
+    const btn = document.getElementById("futurePhotoBtn");
+    const nextBtn = document.getElementById("futurePhotoNext");
+
+    img.src = futurePhoto.src;
+    caption.textContent = futurePhoto.caption;
+    counter.textContent = "One photo... one beautiful future ❤️";
+    frame.classList.add("show");
+    btn.style.display = "none";
+    nextBtn.style.display = "inline-block";
+
+    createSparkles(frame, 8);
+    createHeartsBurst(8);
 }
 
 function showLove(){
     const value = document.getElementById("loveRange").value;
     document.getElementById("loveValue").innerHTML = value + "%";
-
-    if(value < 100){
-        document.getElementById("loveMsg").innerHTML =
-            "Only " + value + "%? Move it to 100% ❤️";
-    }else{
-        document.getElementById("loveMsg").innerHTML =
-            "Awww! I knew it ❤️";
-    }
+    document.getElementById("loveMsg").innerHTML = value < 100
+        ? "Only " + value + "%? Move it to 100% ❤️"
+        : "Awww! I knew it ❤️";
 }
 
 function checkLove(){
     const value = document.getElementById("loveRange").value;
-
     if(value == 100){
-        nextStep(8);
+        createHeartsBurst(10);
+        nextStep(12);
     }else{
-        document.getElementById("loveMsg").innerHTML =
-            "Set it to 100% to continue ❤️";
+        document.getElementById("loveMsg").innerHTML = "Set it to 100% to continue ❤️";
     }
 }
 
 function nextStep(step){
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+    const next = document.getElementById("step" + step);
+    if(next){
+        next.classList.add("active");
+        window.scrollTo({top:0, behavior:"smooth"});
+    }
 
-    document.getElementById("step" + step).classList.add("active");
+    if(step === 16){
+        startFinalTypewriter();
+    }
 }
 
 function wrongHeart(){
-    document.getElementById("heartMsg").innerHTML =
-        "Oops! My heart is always red for you ❤️";
+    document.getElementById("heartMsg").innerHTML = "Oops! My heart is always red for you ❤️";
 }
 
 function popBalloon(el){
@@ -898,106 +1163,124 @@ function popBalloon(el){
     const currentBalloon = balloons[popped];
 
     if(el !== currentBalloon){
-        document.getElementById("balloonMsg").innerHTML =
-            "Pop the balloons from left to right ❤️";
+        document.getElementById("balloonMsg").innerHTML = "Pop the balloons from left to right ❤️";
         return;
     }
 
-    if(el.classList.contains("popped")){
-        return;
-    }
+    if(el.classList.contains("popped")) return;
 
     const word = balloonWords[popped];
-
     el.classList.add("popped");
     showBalloonWord(word);
-    createSparkles(el);
-
+    createSparkles(el, 8);
     popped++;
 
     if(popped < balloonWords.length){
-        document.getElementById("balloonMsg").innerHTML =
-            "Beautiful! Now pop the next balloon ❤️";
+        document.getElementById("balloonMsg").innerHTML = "Beautiful! Now pop the next balloon ❤️";
     }else{
         setTimeout(() => {
             document.getElementById("balloonWord").classList.remove("show");
             document.getElementById("completeMessage").classList.add("show");
-            document.getElementById("balloonMsg").innerHTML =
-                "You are always my favourite person ❤️";
+            document.getElementById("balloonMsg").innerHTML = "You are always my favourite person ❤️";
             document.getElementById("balloonNext").style.display = "inline-block";
-            createHeartsBurst();
-        }, 650);
+            createHeartsBurst(12);
+        }, 550);
     }
 }
 
 function showBalloonWord(word){
     const wordBox = document.getElementById("balloonWord");
-
     wordBox.classList.remove("show");
     wordBox.innerHTML = word;
-
     void wordBox.offsetWidth;
     wordBox.classList.add("show");
 }
 
-function createSparkles(element){
+function createSparkles(element, count){
     const rect = element.getBoundingClientRect();
     const symbols = ["✨","💖","⭐","❤️"];
 
-    for(let i = 0; i < 16; i++){
+    for(let i = 0; i < count; i++){
         const sparkle = document.createElement("span");
         sparkle.className = "sparkle";
         sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-
         sparkle.style.left = (rect.left + rect.width / 2) + "px";
         sparkle.style.top = (rect.top + rect.height / 2) + "px";
-        sparkle.style.setProperty("--x", ((Math.random() - .5) * 240) + "px");
-        sparkle.style.setProperty("--y", ((Math.random() - .5) * 220) + "px");
-        sparkle.style.fontSize = (16 + Math.random() * 18) + "px";
-
+        sparkle.style.setProperty("--x", ((Math.random() - .5) * 170) + "px");
+        sparkle.style.setProperty("--y", ((Math.random() - .5) * 150) + "px");
+        sparkle.style.fontSize = (14 + Math.random() * 12) + "px";
         document.body.appendChild(sparkle);
         setTimeout(() => sparkle.remove(), 900);
     }
 }
 
-function createHeartsBurst(){
-    for(let i = 0; i < 24; i++){
+function createHeartsBurst(count){
+    for(let i = 0; i < count; i++){
         setTimeout(() => {
             const heart = document.createElement("div");
             heart.className = "heart";
             heart.innerHTML = Math.random() > .25 ? "❤️" : "💖";
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+            heart.style.fontSize = (18 + Math.random() * 20) + "px";
             document.body.appendChild(heart);
-
             setTimeout(() => heart.remove(), 5200);
-        }, i * 70);
+        }, i * 85);
     }
 }
 
-function showMain(){
-    document.querySelectorAll(".page").forEach(page => {
-        page.style.display = "none";
-    });
+function startFinalTypewriter(){
+    if(finalTypingStarted) return;
+    finalTypingStarted = true;
 
+    const target = document.getElementById("romanticFinalText");
+    const button = document.getElementById("finalMemoriesBtn");
+    target.textContent = "";
+    target.classList.add("typing-cursor");
+    let index = 0;
+
+    const timer = setInterval(() => {
+        target.textContent += finalMessage.charAt(index);
+        index++;
+
+        if(index >= finalMessage.length){
+            clearInterval(timer);
+            target.classList.remove("typing-cursor");
+            button.style.display = "inline-block";
+            createHeartsBurst(10);
+        }
+    }, 24);
+}
+
+function showMain(){
+    document.querySelectorAll(".page").forEach(page => page.style.display = "none");
     document.getElementById("mainContent").style.display = "block";
     createHearts();
     window.scrollTo({top:0, behavior:"smooth"});
 }
 
 function createHearts(){
-    setInterval(() => {
+    if(heartTimer) return;
+    heartTimer = setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = Math.random() > .2 ? "❤️" : "💖";
+        heart.innerHTML = Math.random() > .25 ? "❤️" : "💖";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (18 + Math.random() * 26) + "px";
+        heart.style.fontSize = (16 + Math.random() * 18) + "px";
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 5000);
-    }, 520);
+    }, 1250);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const nameInput = document.getElementById("favPerson");
+    if(nameInput){
+        nameInput.addEventListener("keydown", event => {
+            if(event.key === "Enter") checkName();
+        });
+    }
+});
 </script>
+
 
 </body>
 </html>
