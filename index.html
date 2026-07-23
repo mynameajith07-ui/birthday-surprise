@@ -392,7 +392,6 @@ section{
     to{transform:translate(var(--x),var(--y)) scale(0);opacity:0;}
 }
 
-
 .choice-grid{
     display:flex;
     justify-content:center;
@@ -465,8 +464,6 @@ section{
     font-weight:800;
     margin-bottom:12px;
 }
-
-
 
 /* ===== Subtle romantic animations only ===== */
 .page.active .content-layer{
@@ -572,7 +569,6 @@ section{
     font-weight:800;
 }
 
-
 .future-photo-box{
     max-width:760px;
     margin:18px auto 0;
@@ -633,6 +629,98 @@ section{
     to{transform:scale(1) translateY(0);opacity:1;}
 }
 
+/* ===== Big Kiss Popup ===== */
+.kiss-popup{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:rgba(45,0,28,.78);
+    backdrop-filter:blur(10px);
+    z-index:100000;
+}
+
+.kiss-popup.show{
+    display:flex;
+}
+
+.kiss-popup-box{
+    width:min(540px,94vw);
+    padding:40px 26px 34px;
+    border-radius:34px;
+    background:
+        radial-gradient(circle at top,rgba(255,255,255,.35),transparent 45%),
+        linear-gradient(135deg,#ff4f87,#ff7eb3,#9b5de5);
+    box-shadow:0 28px 80px rgba(0,0,0,.48);
+    position:relative;
+    overflow:hidden;
+    animation:kissPopupOpen .55s cubic-bezier(.18,.89,.32,1.28);
+}
+
+.kiss-popup-box::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    top:-100px;
+    right:-70px;
+}
+
+.big-kiss-emoji{
+    position:relative;
+    z-index:2;
+    display:inline-block;
+    font-size:clamp(125px,34vw,220px);
+    line-height:1;
+    filter:drop-shadow(0 18px 22px rgba(0,0,0,.30));
+    animation:bigKissAnimation 1s ease-in-out infinite alternate;
+}
+
+.kiss-popup-title{
+    position:relative;
+    z-index:2;
+    font-size:clamp(28px,7vw,43px);
+    margin:18px 0 8px;
+    color:#fff;
+    text-shadow:0 5px 16px rgba(0,0,0,.30);
+}
+
+.kiss-popup-text{
+    position:relative;
+    z-index:2;
+    max-width:440px;
+    margin:8px auto 18px;
+    font-size:20px;
+    line-height:1.6;
+    color:#fff8b5;
+    font-weight:800;
+}
+
+.kiss-popup button{
+    position:relative;
+    z-index:2;
+}
+
+@keyframes kissPopupOpen{
+    from{
+        opacity:0;
+        transform:scale(.45) rotate(-8deg);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) rotate(0deg);
+    }
+}
+
+@keyframes bigKissAnimation{
+    from{transform:scale(1) rotate(-6deg);}
+    to{transform:scale(1.14) rotate(6deg);}
+}
+
 @media(max-width:600px){
     h1{font-size:32px;}
     h2{font-size:22px;}
@@ -651,13 +739,12 @@ section{
     .final-reveal-box{padding:26px 18px;}
     #romanticFinalText{min-height:330px;text-align:center;font-size:19px;}
     .future-photo-frame{height:400px;}
+    .kiss-popup-box{padding:32px 18px 28px;}
 }
-
 </style>
 </head>
 
 <body>
-
 
 <div id="step1" class="page active">
     <div class="content-layer">
@@ -676,11 +763,24 @@ section{
         <div class="question-kicker">Cute Question 1 💕</div>
         <h1>👑 In our love story, who is the boss?</h1>
         <p class="funny-word">Think carefully...😜</p>
+
         <div id="bossChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Correct! Varsha Madam is the boss... but Ajith is the secret manager 😎❤️')">Varsha Madam 👑</button>
-            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Nice try! Ajith boss-nu sonnaalum final decision Varsha kitta dhaan 😜')">Ajith Sir 😎</button>
-            <button class="choice-btn" onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Best answer! Official boss Varsha... unofficial troublemaker Ajith 😂❤️')">Obviously Varsha 😍</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Correct! Varsha Madam is the boss... but Ajith is the secret manager 😎❤️')">
+                Varsha Madam 👑
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Nice try! Ajith boss-nu sonnaalum final decision Varsha kitta dhaan 😜')">
+                Ajith Sir 😎
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'bossChoices','bossMsg','bossNext','Best answer! Official boss Varsha... unofficial troublemaker Ajith 😂❤️')">
+                Obviously Varsha 😍
+            </button>
         </div>
+
         <p id="bossMsg" class="answer-message">Select the safest answer 😄❤️</p>
         <button id="bossNext" style="display:none;" onclick="nextStep(3)">Next Cute Question ❤️</button>
     </div>
@@ -690,11 +790,24 @@ section{
     <div class="content-layer">
         <div class="question-kicker">Cute Question 2 💞</div>
         <h1>🥹 When I say “I miss you”, what should you do?</h1>
+
         <div id="missChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Call me immediately... your voice is my favourite notification ❤️')">Call Me 📞</button>
-            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Meet me soon... distance-ku today leave kuduthudalam 😍')">Meet Me 🤗</button>
-            <button class="choice-btn" onclick="chooseOption(this,'missChoices','missMsg','missNext','Correct answer! Call + meet + one tight hug... no excuses 😜❤️')">Both 💖</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'missChoices','missMsg','missNext','Call me immediately... your voice is my favourite notification ❤️')">
+                Call Me 📞
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'missChoices','missMsg','missNext','Meet me soon... distance-ku today leave kuduthudalam 😍')">
+                Meet Me 🤗
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'missChoices','missMsg','missNext','Correct answer! Call + meet + one tight hug... no excuses 😜❤️')">
+                Both 💖
+            </button>
         </div>
+
         <p id="missMsg" class="answer-message">Choose Pannunga, senior madam 😍</p>
         <button id="missNext" style="display:none;" onclick="nextStep(4)">One More ❤️</button>
     </div>
@@ -705,16 +818,27 @@ section{
         <div class="question-kicker">Funny Love Question 😄</div>
         <h1>🎬 What is our love-story title?</h1>
         <p class="funny-word">Love-la nee senior... aana unna adhigama love panrathula naan senior 😎❤️</p>
+
         <div id="titleChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Super title! Senior Madam & Junior Hero — blockbuster confirmed 🎬❤️')">Senior Madam & Junior Hero 🎥</button>
-            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Cute! Naanum En Queen-um — daily romance, daily comedy 👑😂')">Naanum En Queen-um 👑</button>
-            <button class="choice-btn" onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Perfect! Next year marriage edition release aagum 💍❤️')">Next Year: Marriage Edition 💍</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Super title! Senior Madam & Junior Hero — blockbuster confirmed 🎬❤️')">
+                Senior Madam & Junior Hero 🎥
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Cute! Naanum En Queen-um — daily romance, daily comedy 👑😂')">
+                Naanum En Queen-um 👑
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'titleChoices','titleMsg','titleNext','Perfect! Next year marriage edition release aagum 💍❤️')">
+                Next Year: Marriage Edition 💍
+            </button>
         </div>
+
         <p id="titleMsg" class="answer-message">Choose our movie title ❤️</p>
         <button id="titleNext" style="display:none;" onclick="nextStep(5)">Continue Surprise ❤️</button>
     </div>
-</div>
-
 </div>
 
 <div id="step5" class="page">
@@ -722,14 +846,22 @@ section{
         <div class="step-count">Special Click ❤️</div>
         <h1>📸 Our Future Photo</h1>
         <p class="question-note">Click pannina namma single future photo open aagum ❤️</p>
+
         <div class="future-photo-box">
-            <button id="futurePhotoBtn" class="future-photo-btn" onclick="showFuturePhoto()">Open Our Future Photo 😍❤️</button>
+            <button id="futurePhotoBtn" class="future-photo-btn" onclick="showFuturePhoto()">
+                Open Our Future Photo 😍❤️
+            </button>
+
             <div id="futurePhotoFrame" class="future-photo-frame">
                 <img id="futurePhotoImg" src="photo42.jpeg" alt="Our Future Photo">
             </div>
+
             <p id="futurePhotoCaption" class="future-photo-caption">Click to open our future photo ❤️</p>
             <div id="futurePhotoCounter" class="future-photo-counter"></div>
-            <button id="futurePhotoNext" style="display:none;" onclick="nextStep(6)">Next Question ❤️</button>
+
+            <button id="futurePhotoNext" style="display:none;" onclick="nextStep(6)">
+                Next Question ❤️
+            </button>
         </div>
     </div>
 </div>
@@ -739,14 +871,17 @@ section{
         <div class="step-count">Question 5 ❤️</div>
         <h1>🍽️ What are you eating today?</h1>
         <p class="question-note">Choose your birthday food, My Dear Varsha 😋</p>
+
         <div id="foodChoices" class="choice-grid">
             <button class="choice-btn" onclick="selectFood(this,'Mutton Biriyani')">🍖 Mutton Biriyani</button>
             <button class="choice-btn" onclick="selectFood(this,'Chicken Biriyani')">🍗 Chicken Biriyani</button>
             <button class="choice-btn" onclick="selectFood(this,'Other')">🍽️ Other</button>
         </div>
+
         <div id="otherFoodWrap">
             <input type="text" id="otherFood" placeholder="Tell me what you want 😋" autocomplete="off">
         </div>
+
         <p id="foodMsg" class="answer-message">Select one delicious option ❤️</p>
         <button id="foodNext" style="display:none;" onclick="continueFood()">Next Question ❤️</button>
     </div>
@@ -757,10 +892,12 @@ section{
         <div class="step-count">Question 6 ❤️</div>
         <h1>🏖️ Do you want to go to the beach today?</h1>
         <p class="question-note">Be careful... only Yes answer is accepted 😜</p>
+
         <div id="beachZone" class="no-zone">
             <button id="beachYes" onclick="acceptBeach()">YES! LET'S GO 🏖️❤️</button>
             <button id="beachNo" onmouseenter="moveNoButton()" onclick="moveNoButton()">NO 🙈</button>
         </div>
+
         <p id="beachMsg" class="answer-message">Choose wisely, birthday girl 😍</p>
     </div>
 </div>
@@ -769,11 +906,24 @@ section{
     <div class="content-layer">
         <div class="step-count">Question 7 ❤️</div>
         <h1>🌅 Which beach moment do you want with me?</h1>
+
         <div id="momentChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Holding your hand near the waves will be perfect ❤️')">🤝 Holding Hands</button>
-            <button class="choice-btn" onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','A sunset walk with you sounds beautiful 🌅❤️')">🚶 Sunset Walk</button>
-            <button class="choice-btn" onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Sitting and talking with you is my favourite kind of peace 💖')">🌊 Sit & Talk</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Holding your hand near the waves will be perfect ❤️')">
+                🤝 Holding Hands
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','A sunset walk with you sounds beautiful 🌅❤️')">
+                🚶 Sunset Walk
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'momentChoices','momentMsg','momentNext','Sitting and talking with you is my favourite kind of peace 💖')">
+                🌊 Sit & Talk
+            </button>
         </div>
+
         <p id="momentMsg" class="answer-message">Pick our perfect beach moment ❤️</p>
         <button id="momentNext" style="display:none;" onclick="nextStep(9)">Lovely Choice ❤️</button>
     </div>
@@ -783,11 +933,24 @@ section{
     <div class="content-layer">
         <div class="step-count">Question 8 ❤️</div>
         <h1>✨ What should we do after the beach?</h1>
+
         <div id="planChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'planChoices','planMsg','planNext','Long drive with your favourite songs... deal! 🚗❤️')">🚗 Long Drive</button>
-            <button class="choice-btn" onclick="chooseOption(this,'planChoices','planMsg','planNext','Ice cream date confirmed, birthday girl 🍦💖')">🍦 Ice Cream</button>
-            <button class="choice-btn" onclick="chooseOption(this,'planChoices','planMsg','planNext','Both? Best answer! Today is completely yours 😍')">💞 Both</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'planChoices','planMsg','planNext','Long drive with your favourite songs... deal! 🚗❤️')">
+                🚗 Long Drive
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'planChoices','planMsg','planNext','Ice cream date confirmed, birthday girl 🍦💖')">
+                🍦 Ice Cream
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'planChoices','planMsg','planNext','Both? Best answer! Today is completely yours 😍')">
+                💞 Both
+            </button>
         </div>
+
         <p id="planMsg" class="answer-message">You can choose anything... today is your day ❤️</p>
         <button id="planNext" style="display:none;" onclick="nextStep(10)">Next Surprise ❤️</button>
     </div>
@@ -797,11 +960,24 @@ section{
     <div class="content-layer">
         <div class="step-count">Question 9 ❤️</div>
         <h1>🤗 How many hugs do you want today?</h1>
+
         <div id="hugChoices" class="choice-grid">
-            <button class="choice-btn" onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Only 10? I will secretly give you more 😜❤️')">10 Hugs 🤗</button>
-            <button class="choice-btn" onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','100 hugs booked for the birthday girl 💖')">100 Hugs 🥰</button>
-            <button class="choice-btn" onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Unlimited hugs forever—that is the correct answer ❤️')">Unlimited ♾️❤️</button>
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Only 10? I will secretly give you more 😜❤️')">
+                10 Hugs 🤗
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','100 hugs booked for the birthday girl 💖')">
+                100 Hugs 🥰
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'hugChoices','hugMsg','hugNext','Unlimited hugs forever—that is the correct answer ❤️')">
+                Unlimited ♾️❤️
+            </button>
         </div>
+
         <p id="hugMsg" class="answer-message">Choose carefully... hugs cannot be returned 😍</p>
         <button id="hugNext" style="display:none;" onclick="nextStep(11)">Continue ❤️</button>
     </div>
@@ -811,70 +987,136 @@ section{
     <div class="content-layer">
         <div class="step-count">Question 10 ❤️</div>
         <h1>💖 How much do you love me?</h1>
+
         <input type="range" min="0" max="100" value="0" id="loveRange" oninput="showLove()">
         <p id="loveValue">0%</p>
         <p id="loveMsg"></p>
+
         <button onclick="checkLove()">Next ❤️</button>
+    </div>
+</div>
+
+<!-- Big Kiss Emoji Popup -->
+<div id="kissPopup" class="kiss-popup" role="dialog" aria-modal="true" aria-labelledby="kissPopupTitle">
+    <div class="kiss-popup-box">
+        <div class="big-kiss-emoji">😘</div>
+
+        <h1 id="kissPopupTitle" class="kiss-popup-title">
+            A Big Birthday Kiss For You ❤️
+        </h1>
+
+        <p class="kiss-popup-text">
+            This is only the sample kiss... real kisses are waiting for you 😜💋
+        </p>
+
+        <button onclick="openKissQuestion()">Next Kiss Question 💋</button>
     </div>
 </div>
 
 <div id="step12" class="page">
     <div class="content-layer">
-        <div class="step-count">Question 11 ❤️</div>
-        <h1>Will you love me forever? ❤️</h1>
-        <button onclick="nextStep(13)">YES ❤️</button>
-        <button onclick="nextStep(13)">OF COURSE 💖</button>
-        <button onclick="nextStep(13)">ALWAYS 😍</button>
+        <div class="step-count">Question 11 💋</div>
+        <h1>💋 How many kisses do you want today?</h1>
+
+        <p class="question-note">
+            Choose carefully... once booked, kisses cannot be cancelled 😜❤️
+        </p>
+
+        <div id="kissChoices" class="choice-grid">
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'kissChoices','kissMsg','kissNext','Only 10 kisses? I will secretly give you extra kisses 😜💋')">
+                10 Kisses 😘
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'kissChoices','kissMsg','kissNext','100 birthday kisses booked specially for My Dear Varsha 💋❤️')">
+                100 Kisses 🥰
+            </button>
+
+            <button class="choice-btn"
+                    onclick="chooseOption(this,'kissChoices','kissMsg','kissNext','Unlimited kisses forever! Correct answer, birthday girl 😘❤️')">
+                Unlimited Kisses ♾️💋
+            </button>
+        </div>
+
+        <p id="kissMsg" class="answer-message">Select your birthday kiss package 😍</p>
+        <button id="kissNext" style="display:none;" onclick="nextStep(13)">Continue My Love ❤️</button>
     </div>
 </div>
 
 <div id="step13" class="page">
     <div class="content-layer">
         <div class="step-count">Question 12 ❤️</div>
-        <h1>Find My Heart ❤️</h1>
-        <p>Click the correct heart</p>
-        <button onclick="wrongHeart()">🤍</button>
-        <button onclick="nextStep(14)">❤️</button>
-        <button onclick="wrongHeart()">💙</button>
-        <p id="heartMsg"></p>
+        <h1>Will you love me forever? ❤️</h1>
+
+        <button onclick="nextStep(14)">YES ❤️</button>
+        <button onclick="nextStep(14)">OF COURSE 💖</button>
+        <button onclick="nextStep(14)">ALWAYS 😍</button>
     </div>
 </div>
 
 <div id="step14" class="page">
     <div class="content-layer">
-        <h1>🎂 Cake Cutting Time</h1>
-        <div style="font-size:130px;cursor:pointer;filter:drop-shadow(0 14px 18px rgba(0,0,0,.22));"
-             onclick="nextStep(15)">🎂</div>
-        <p style="font-size:21px;">Click the cake, My Dear Varsha ❤️</p>
+        <div class="step-count">Question 13 ❤️</div>
+        <h1>Find My Heart ❤️</h1>
+        <p>Click the correct heart</p>
+
+        <button onclick="wrongHeart()">🤍</button>
+        <button onclick="nextStep(15)">❤️</button>
+        <button onclick="wrongHeart()">💙</button>
+
+        <p id="heartMsg"></p>
     </div>
 </div>
 
 <div id="step15" class="page">
     <div class="content-layer">
+        <h1>🎂 Cake Cutting Time</h1>
+
+        <div style="font-size:130px;cursor:pointer;filter:drop-shadow(0 14px 18px rgba(0,0,0,.22));"
+             onclick="nextStep(16)">
+            🎂
+        </div>
+
+        <p style="font-size:21px;">Click the cake, My Dear Varsha ❤️</p>
+    </div>
+</div>
+
+<div id="step16" class="page">
+    <div class="content-layer">
         <h1>🎈 Pop the Balloons One by One</h1>
+
         <div class="balloon-wrap">
             <span class="balloon" data-word="YOU" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="ARE" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="MY" onclick="popBalloon(this)">🎈</span>
             <span class="balloon" data-word="FAVOURITE" onclick="popBalloon(this)">🎈</span>
         </div>
+
         <div class="word-box">
             <div id="balloonWord" class="balloon-word"></div>
         </div>
+
         <div id="completeMessage" class="complete-message">YOU ARE MY FAVOURITE ❤️</div>
         <p id="balloonMsg">Pop the first balloon ❤️</p>
-        <button id="balloonNext" style="display:none;" onclick="nextStep(16)">Final Surprise ❤️</button>
+
+        <button id="balloonNext" style="display:none;" onclick="nextStep(17)">
+            Final Surprise ❤️
+        </button>
     </div>
 </div>
 
-<div id="step16" class="page">
+<div id="step17" class="page">
     <div class="content-layer">
         <div class="final-reveal-box">
             <h1>💌 A Message From Ajith</h1>
             <p id="romanticFinalText" class="typing-cursor"></p>
             <button id="finalMemoriesBtn" onclick="showMain()">Open Our Memories ❤️</button>
         </div>
-        <p class="mini-love-line">Love-la nee senior... aana unna adhigama love panrathula naan dhaan senior 😜❤️</p>
+
+        <p class="mini-love-line">
+            Love-la nee senior... aana unna adhigama love panrathula naan dhaan senior 😜❤️
+        </p>
     </div>
 </div>
 
@@ -897,6 +1139,7 @@ section{
 <section>
     <div class="card">
         <h1>💌 My Dear Varshuuu</h1>
+
         <p style="font-size:21px;line-height:36px;">
             Happy 23rd Birthday, My Dear Varsha ❤️<br><br>
 
@@ -935,49 +1178,49 @@ section{
 </section>
 
 <section>
-    <h1>📸Beautiful Memories❤️</h1>
+    <h1>📸 Beautiful Memories ❤️</h1>
 
     <div class="gallery">
-        <div class="gallery-item"><img src="photo2.jpg" alt=" 2"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo3.jpg" alt=" 3"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo4.jpg" alt=" 4"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo5.jpg" alt=" 5"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo6.jpg" alt=" 6"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo7.jpg" alt=" 7"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo8.jpg" alt=" 8"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo9.jpg" alt=" 9"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo10.jpg" alt=" 10"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo11.jpg" alt=" 11"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo12.jpg" alt=" 12"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo13.png" alt=" 13"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo14.jpg" alt=" 14"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo15.jpg" alt=" 15"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo16.jpg" alt=" 16"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo17.jpg" alt=" 17"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo18.jpg" alt=" 18"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo19.jpg" alt=" 19"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo20.jpg" alt=" 20"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo21.jpg" alt=" 21"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo22.jpg" alt=" 22"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo23.jpeg" alt=" 23"><div class="caption">❤️</div></div>
-        <div class="gallery-item"><img src="photo24.jpeg" alt=" 24"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo25.jpg" alt=" 25"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo26.jpg" alt=" 26"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo27.jpg" alt=" 27"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo28.jpg" alt=" 28"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo29.jpg" alt=" 29"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo30.jpg" alt=" 30"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo31.jpg" alt=" 31"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo32.jpg" alt=" 32"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo33.jpg" alt=" 33"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo34.jpg" alt=" 34"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo35.jpg" alt=" 35"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo36.jpg" alt=" 36"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo37.jpg" alt=" 37"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo38.jpg" alt=" 38"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo39.jpg" alt=" 39"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo40.jpg" alt=" 40"><div class="caption">❤️</div></div>
- <div class="gallery-item"><img src="photo41.jpeg" alt=" 41"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo2.jpg" alt="Photo 2"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo3.jpg" alt="Photo 3"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo4.jpg" alt="Photo 4"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo5.jpg" alt="Photo 5"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo6.jpg" alt="Photo 6"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo7.jpg" alt="Photo 7"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo8.jpg" alt="Photo 8"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo9.jpg" alt="Photo 9"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo10.jpg" alt="Photo 10"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo11.jpg" alt="Photo 11"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo12.jpg" alt="Photo 12"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo13.png" alt="Photo 13"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo14.jpg" alt="Photo 14"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo15.jpg" alt="Photo 15"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo16.jpg" alt="Photo 16"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo17.jpg" alt="Photo 17"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo18.jpg" alt="Photo 18"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo19.jpg" alt="Photo 19"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo20.jpg" alt="Photo 20"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo21.jpg" alt="Photo 21"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo22.jpg" alt="Photo 22"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo23.jpeg" alt="Photo 23"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo24.jpeg" alt="Photo 24"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo25.jpg" alt="Photo 25"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo26.jpg" alt="Photo 26"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo27.jpg" alt="Photo 27"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo28.jpg" alt="Photo 28"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo29.jpg" alt="Photo 29"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo30.jpg" alt="Photo 30"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo31.jpg" alt="Photo 31"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo32.jpg" alt="Photo 32"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo33.jpg" alt="Photo 33"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo34.jpg" alt="Photo 34"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo35.jpg" alt="Photo 35"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo36.jpg" alt="Photo 36"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo37.jpg" alt="Photo 37"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo38.jpg" alt="Photo 38"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo39.jpg" alt="Photo 39"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo40.jpg" alt="Photo 40"><div class="caption">❤️</div></div>
+        <div class="gallery-item"><img src="photo41.jpeg" alt="Photo 41"><div class="caption">❤️</div></div>
     </div>
 
     <p style="font-size:23px;">
@@ -988,6 +1231,7 @@ section{
 <section>
     <div class="card">
         <h1>🎂 Final Surprise 🎂</h1>
+
         <p class="final">
             I LOVE YOU, MY DEAR VARSHA ❤️<br><br>
             Today... Tomorrow... Always... Forever...
@@ -996,7 +1240,6 @@ section{
 </section>
 
 </div>
-
 
 <script>
 let popped = 0;
@@ -1008,6 +1251,7 @@ const futurePhoto = {
     src: "photo42.jpeg",
     caption: "Our Future Photo ❤️ — Namma happiest future together."
 };
+
 const balloonWords = ["YOU", "ARE", "MY", "FAVOURITE"];
 
 const finalMessage = `Hi My Dear Varsha,
@@ -1026,6 +1270,7 @@ Happy Birthday, My Dear Varsha ❤️`;
 
 function checkName(){
     const name = document.getElementById("favPerson").value.trim().toLowerCase();
+
     if(name === "ajith"){
         nextStep(2);
     }else{
@@ -1035,7 +1280,10 @@ function checkName(){
 }
 
 function selectFood(button, food){
-    document.querySelectorAll("#foodChoices .choice-btn").forEach(btn => btn.classList.remove("selected"));
+    document.querySelectorAll("#foodChoices .choice-btn").forEach(btn => {
+        btn.classList.remove("selected");
+    });
+
     button.classList.add("selected");
     selectedFood = food;
 
@@ -1056,6 +1304,7 @@ function selectFood(button, food){
 
 function continueFood(){
     const foodMsg = document.getElementById("foodMsg");
+
     if(!selectedFood){
         foodMsg.innerHTML = "Please choose one food first ❤️";
         return;
@@ -1063,6 +1312,7 @@ function continueFood(){
 
     if(selectedFood === "Other"){
         const otherFood = document.getElementById("otherFood").value.trim();
+
         if(!otherFood){
             foodMsg.innerHTML = "Please type what you want to eat 😋";
             return;
@@ -1075,33 +1325,42 @@ function continueFood(){
 function acceptBeach(){
     document.getElementById("beachMsg").innerHTML =
         "Yay! Beach date confirmed with Ajith 🏖️❤️";
+
     createHeartsBurst(10);
-    setTimeout(() => nextStep(8), 550);
+
+    setTimeout(() => {
+        nextStep(8);
+    }, 550);
 }
 
 function moveNoButton(){
     const zone = document.getElementById("beachZone");
     const noButton = document.getElementById("beachNo");
+
     const maxLeft = Math.max(0, zone.clientWidth - noButton.offsetWidth);
     const maxTop = Math.max(0, zone.clientHeight - noButton.offsetHeight);
 
     noButton.style.right = "auto";
     noButton.style.left = Math.floor(Math.random() * maxLeft) + "px";
     noButton.style.top = Math.floor(Math.random() * maxTop) + "px";
-    noButton.style.transform = "rotate(" + (Math.random() * 12 - 6) + "deg)";
+    noButton.style.transform =
+        "rotate(" + (Math.random() * 12 - 6) + "deg)";
 
     document.getElementById("beachMsg").innerHTML =
         "NO is not allowed 😜 Only YES can unlock the next question ❤️";
 }
 
 function chooseOption(button, groupId, messageId, nextButtonId, message){
-    document.querySelectorAll("#" + groupId + " .choice-btn").forEach(btn => btn.classList.remove("selected"));
+    document.querySelectorAll("#" + groupId + " .choice-btn").forEach(btn => {
+        btn.classList.remove("selected");
+    });
+
     button.classList.add("selected");
     document.getElementById(messageId).innerHTML = message;
     document.getElementById(nextButtonId).style.display = "inline-block";
+
     createSparkles(button, 7);
 }
-
 
 function showFuturePhoto(){
     const frame = document.getElementById("futurePhotoFrame");
@@ -1114,6 +1373,7 @@ function showFuturePhoto(){
     img.src = futurePhoto.src;
     caption.textContent = futurePhoto.caption;
     counter.textContent = "One photo... one beautiful future ❤️";
+
     frame.classList.add("show");
     btn.style.display = "none";
     nextBtn.style.display = "inline-block";
@@ -1124,37 +1384,83 @@ function showFuturePhoto(){
 
 function showLove(){
     const value = document.getElementById("loveRange").value;
+
     document.getElementById("loveValue").innerHTML = value + "%";
-    document.getElementById("loveMsg").innerHTML = value < 100
-        ? "Only " + value + "%? Move it to 100% ❤️"
-        : "Awww! I knew it ❤️";
+
+    document.getElementById("loveMsg").innerHTML =
+        value < 100
+            ? "Only " + value + "%? Move it to 100% ❤️"
+            : "Awww! I knew it ❤️";
 }
 
 function checkLove(){
     const value = document.getElementById("loveRange").value;
+
     if(value == 100){
-        createHeartsBurst(10);
-        nextStep(12);
+        createHeartsBurst(12);
+
+        setTimeout(() => {
+            showKissPopup();
+        }, 350);
     }else{
-        document.getElementById("loveMsg").innerHTML = "Set it to 100% to continue ❤️";
+        document.getElementById("loveMsg").innerHTML =
+            "Set it to 100% to continue ❤️";
     }
 }
 
-function nextStep(step){
-    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-    const next = document.getElementById("step" + step);
-    if(next){
-        next.classList.add("active");
-        window.scrollTo({top:0, behavior:"smooth"});
+function showKissPopup(){
+    const popup = document.getElementById("kissPopup");
+
+    if(!popup) return;
+
+    popup.classList.add("show");
+    document.body.style.overflow = "hidden";
+
+    const popupBox = popup.querySelector(".kiss-popup-box");
+
+    if(popupBox){
+        createSparkles(popupBox, 14);
     }
 
-    if(step === 16){
+    createHeartsBurst(14);
+}
+
+function openKissQuestion(){
+    const popup = document.getElementById("kissPopup");
+
+    if(popup){
+        popup.classList.remove("show");
+    }
+
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "auto";
+
+    nextStep(12);
+}
+
+function nextStep(step){
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const next = document.getElementById("step" + step);
+
+    if(next){
+        next.classList.add("active");
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+    }
+
+    if(step === 17){
         startFinalTypewriter();
     }
 }
 
 function wrongHeart(){
-    document.getElementById("heartMsg").innerHTML = "Oops! My heart is always red for you ❤️";
+    document.getElementById("heartMsg").innerHTML =
+        "Oops! My heart is always red for you ❤️";
 }
 
 function popBalloon(el){
@@ -1162,26 +1468,32 @@ function popBalloon(el){
     const currentBalloon = balloons[popped];
 
     if(el !== currentBalloon){
-        document.getElementById("balloonMsg").innerHTML = "Pop the balloons from left to right ❤️";
+        document.getElementById("balloonMsg").innerHTML =
+            "Pop the balloons from left to right ❤️";
         return;
     }
 
     if(el.classList.contains("popped")) return;
 
     const word = balloonWords[popped];
+
     el.classList.add("popped");
     showBalloonWord(word);
     createSparkles(el, 8);
+
     popped++;
 
     if(popped < balloonWords.length){
-        document.getElementById("balloonMsg").innerHTML = "Beautiful! Now pop the next balloon ❤️";
+        document.getElementById("balloonMsg").innerHTML =
+            "Beautiful! Now pop the next balloon ❤️";
     }else{
         setTimeout(() => {
             document.getElementById("balloonWord").classList.remove("show");
             document.getElementById("completeMessage").classList.add("show");
-            document.getElementById("balloonMsg").innerHTML = "You are always my favourite person ❤️";
+            document.getElementById("balloonMsg").innerHTML =
+                "You are always my favourite person ❤️";
             document.getElementById("balloonNext").style.display = "inline-block";
+
             createHeartsBurst(12);
         }, 550);
     }
@@ -1189,27 +1501,50 @@ function popBalloon(el){
 
 function showBalloonWord(word){
     const wordBox = document.getElementById("balloonWord");
+
     wordBox.classList.remove("show");
     wordBox.innerHTML = word;
+
     void wordBox.offsetWidth;
+
     wordBox.classList.add("show");
 }
 
 function createSparkles(element, count){
     const rect = element.getBoundingClientRect();
-    const symbols = ["✨","💖","⭐","❤️"];
+    const symbols = ["✨","💖","⭐","❤️","💋"];
 
     for(let i = 0; i < count; i++){
         const sparkle = document.createElement("span");
+
         sparkle.className = "sparkle";
-        sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-        sparkle.style.left = (rect.left + rect.width / 2) + "px";
-        sparkle.style.top = (rect.top + rect.height / 2) + "px";
-        sparkle.style.setProperty("--x", ((Math.random() - .5) * 170) + "px");
-        sparkle.style.setProperty("--y", ((Math.random() - .5) * 150) + "px");
-        sparkle.style.fontSize = (14 + Math.random() * 12) + "px";
+        sparkle.innerHTML =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        sparkle.style.left =
+            (rect.left + rect.width / 2) + "px";
+
+        sparkle.style.top =
+            (rect.top + rect.height / 2) + "px";
+
+        sparkle.style.setProperty(
+            "--x",
+            ((Math.random() - .5) * 170) + "px"
+        );
+
+        sparkle.style.setProperty(
+            "--y",
+            ((Math.random() - .5) * 150) + "px"
+        );
+
+        sparkle.style.fontSize =
+            (14 + Math.random() * 12) + "px";
+
         document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 900);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 900);
     }
 }
 
@@ -1217,24 +1552,32 @@ function createHeartsBurst(count){
     for(let i = 0; i < count; i++){
         setTimeout(() => {
             const heart = document.createElement("div");
+
             heart.className = "heart";
             heart.innerHTML = Math.random() > .25 ? "❤️" : "💖";
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.fontSize = (18 + Math.random() * 20) + "px";
+
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5200);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5200);
         }, i * 85);
     }
 }
 
 function startFinalTypewriter(){
     if(finalTypingStarted) return;
+
     finalTypingStarted = true;
 
     const target = document.getElementById("romanticFinalText");
     const button = document.getElementById("finalMemoriesBtn");
+
     target.textContent = "";
     target.classList.add("typing-cursor");
+
     let index = 0;
 
     const timer = setInterval(() => {
@@ -1243,43 +1586,79 @@ function startFinalTypewriter(){
 
         if(index >= finalMessage.length){
             clearInterval(timer);
+
             target.classList.remove("typing-cursor");
             button.style.display = "inline-block";
+
             createHeartsBurst(10);
         }
     }, 24);
 }
 
 function showMain(){
-    document.querySelectorAll(".page").forEach(page => page.style.display = "none");
+    document.querySelectorAll(".page").forEach(page => {
+        page.style.display = "none";
+    });
+
+    const popup = document.getElementById("kissPopup");
+
+    if(popup){
+        popup.classList.remove("show");
+    }
+
+    document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "auto";
     document.getElementById("mainContent").style.display = "block";
+
     createHearts();
-    window.scrollTo({top:0, behavior:"smooth"});
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 function createHearts(){
     if(heartTimer) return;
+
     heartTimer = setInterval(() => {
         const heart = document.createElement("div");
+
         heart.className = "heart";
         heart.innerHTML = Math.random() > .25 ? "❤️" : "💖";
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.fontSize = (16 + Math.random() * 18) + "px";
+
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
     }, 1250);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const nameInput = document.getElementById("favPerson");
+
     if(nameInput){
         nameInput.addEventListener("keydown", event => {
-            if(event.key === "Enter") checkName();
+            if(event.key === "Enter"){
+                checkName();
+            }
+        });
+    }
+
+    const otherFoodInput = document.getElementById("otherFood");
+
+    if(otherFoodInput){
+        otherFoodInput.addEventListener("keydown", event => {
+            if(event.key === "Enter"){
+                continueFood();
+            }
         });
     }
 });
 </script>
-
 
 </body>
 </html>
